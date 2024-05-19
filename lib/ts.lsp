@@ -20,7 +20,7 @@
 (context MAIN)
 
 (constant (global 'LIBS)
-          (string (env "HOME") "/.local/newLISP/newlisp-tk/lib/"))
+          (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
 ## ------- INIT/IMPORT -----------------------------------------------
 (load (string LIBS "Tk.lsp"))     ;(context 'Tk)
 (load (string LIBS "msg.lsp"))    ;interface to Tcl/Tk message boxes 
