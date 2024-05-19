@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "HTML 4.01 Transitional">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tk.lsp</title>
+
+<link rel="stylesheet" type="text/css" href="newlispdoc.css" />
+</head>
+
+<body style="margin: 20px;" text="#111111" bgcolor="#FFFFFF" 
+            link="#376590" vlink="#551A8B" alink="#ffAA28">
+<blockquote>
+<center><h1>Tk.lsp</h1></center>
+<p><a href="index.html">Module index</a></p><br/>
+<h2>Module:&nbsp;Tk.lsp </h2><p>This module provides a couple of functions used to communicate with Tcl/Tk (<wish>).</p>
+<br/><br/>
+<b>Author: </b>@ pdb 2024<br/>
+<br/><br/>
+ Base process is Tcl/Tk's <em>/usr/bin/wish</em>.
+<br/><br/>
+ This module provides the functions:
+ <blockquote>
+ <ul>
+ <li>init</li>
+ <li>Tk</li>
+ <li>mainloop</li>
+ </ul>
+ </blockquote>
+<br/><br/>
+ filename: ~/.local/lib/newLISP/Tk-server/Tk.lsp
+<br/><br/><center>&sect;</center><br/>
+<a name="Tk_Tcl-procs"></a><h3><font color=#CC0000>Tk:Tcl-procs</font></h3>
+<b>syntax: (<font color=#CC0000>Tk:Tcl-procs</font>)</b><br/>
+<br/><br/>
+ This function will send two procs to <em>wish</em> providing the ability to
+ <blockquote>
+ <ul>
+ <li>create a new window</li>
+ <li>to center it on the screen</li>
+ </ul>
+ </blockquote>
+<br/><br/>
+<br/><br/><center>&sect;</center><br/>
+<a name="Tk_init"></a><h3><font color=#CC0000>Tk:init</font></h3>
+<b>syntax: (<font color=#CC0000>Tk:init</font>)</b><br/>
+<br/><br/>
+ Establish the pipes between <em>Tk.lsp</em> and <em>wish</em>.
+ There are two pipes being used:
+ <blockquote>
+ <ul>
+ <li>one for reading (from whish via myin/tcout)</li>
+ <li>one for writing (to whish via tcin/myout)</li>
+ </ul>
+ </blockquote>
+ When running on a Linux-system, there will be a third pipe (errout),
+ showing error-messages.
+
+
+<br/><br/><center>&sect;</center><br/>
+<a name="Tk_Tk"></a><h3><font color=#CC0000>Tk:Tk</font></h3>
+<b>syntax: (<font color=#CC0000>Tk:Tk</font>)</b><br/>
+<br/><br/>
+ This is the Default-Functor for the (context ’Tk) and the basic
+ sending-machine. It mainly does a write-line into the pipe myout.
+ So it’s a sender only.
+<br/><br/>
+ Data being sent to <em>wish</em> via a <em>write-line</em> and the according internal
+ pipe-handler <em>myout</em>.
+<br/><br/>
+<b>Example:</b><blockquote><pre> (Tk "wm geometry . +600+100")
+ (Tk "wm title    . {Label-Test}")
+ 
+ (Tk "ttk::label .lb1 -text \"Feld 1\" -borderwidth 2 -relief solid")
+ (Tk "grid .lb1 -row 0 -column 0")</pre></blockquote>
+<br/><br/><center>&sect;</center><br/>
+<a name="Tk_mainloop"></a><h3><font color=#CC0000>Tk:mainloop</font></h3>
+<b>syntax: (<font color=#CC0000>Tk:mainloop</font>)</b><br/>
+<br/><br/>
+ This function defines an endless loop, waiting for the output
+ from <em>wish</em>.
+ This output comes from events triggered by the user, such as
+ mouse-clicks or data entry into the GUI.
+ Output from <em>wish</em> will be interpreted using <em>eval-string</em>.
+ Commands associated with a button for instance, can be called this way.
+<br/><br/>
+ <em>Tk:mainloop</em> can only be stopped via an event like pressing an
+ exit-Button and therefore calling a command which in turn will stop
+ (exit) the application.
+
+
+<br/><br/><center>&sect;</center><br/>
+<a name="Tk_wait"></a><h3><font color=#CC0000>Tk:wait</font></h3>
+<b>syntax: (<font color=#CC0000>Tk:wait</font>)</b><br/>
+<br/><br/>
+<b>Result: </b>a non-empty line read by the newLISP read-line function.<br/>
+<br/><br/>
+ This function defines a loop, waiting for the output from <em>wish</em>.
+ This output normally is the answer to a question sent to <em>wish</em>.
+<br/><br/>
+ The loop is left when read-line detects a non-empty line.
+
+
+
+
+
+
+
+
+<br/><br/><center>- &part; -</center><br/>
+<center><font face='Arial' size='-2' color='#444444'>
+generated with <a href="http://newlisp.org">newLISP</a>&nbsp;
+and <a href="http://newlisp.org/newLISPdoc.html">newLISPdoc</a>
+</font></center>
+</blockquote>
+</body>
+</html>
