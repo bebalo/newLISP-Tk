@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-19 18:08:17 paul>"))
+		  "<, Time-stamp: <2024-05-20 19:52:15 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -331,6 +331,40 @@
 
 
 ##--------------------------------------------------------------------
+## example:
+## set filename "readme.txt"
+## .fr.tx import $filename end
+;; @syntax (:import <obj-name> <str-file-name> <pos>)
+;;
+;; @param <obj-name> widget (entry)
+;; @param <str-file-name> string denoting a file path
+;; @param <str-pos> position "0"... or "end"
+;;
+;; Imports the content of a text file named in <str-file-name> into
+;; the widget described by <obj-name>.  Normally a Scrolledtext area.
+;;
+;; @example
+;;  (:import tx "end" "readme.txt")
+;; --> tcltk:
+;;  ".tx import \"readme.txt\" end"
+
+(define (Window:import ind str-file-name )
+   "Import Text from a file and enter into an Entry-widget/Scrolledtext"
+   (let (name-string ""   import-string "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq import-string
+            (string name-string
+                    " import "
+                    (string " \"" str-file-name "\" ")
+                    ind
+                    ))
+      ;; (println nl "import-string: " import-string)
+      (Tk import-string)
+      );let
+   );Window:insert
+
+
+##--------------------------------------------------------------------
 ## Tcl/Tk:
 ## Elementname delete IndexFrom IndexTo
 ## ttk::entry .en
@@ -560,7 +594,7 @@
                        " -textvariable "
                        (last (assoc Textvariable (self)))
                        )));when
-      (println "Entry:build.widget-string: " widget-string)
+      ;; (println "Entry:build.widget-string: " widget-string)
       (Tk widget-string) ; ==> send to Tk
       );let
    );Entry:build
@@ -737,7 +771,7 @@
                (string " -state " (last (assoc State (self)))))
          (setq widget-string (string widget-string option-string))
          );when
-      (println "Scrolledtext:build.widget-string:" nl widget-string) 
+      ;; (println "Scrolledtext:build.widget-string:" nl widget-string) 
       (Tk widget-string) ; ==> send to Tk
       ));Scrolledtext:build
 
