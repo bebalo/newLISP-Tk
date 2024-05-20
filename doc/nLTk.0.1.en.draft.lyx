@@ -4535,6 +4535,125 @@ obj
 \begin_layout Paragraph
 
 \family typewriter
+Window:import
+\end_layout
+
+\begin_layout Standard
+Status: May 20, 2024
+\end_layout
+
+\begin_layout Description
+syntax 
+\family typewriter
+\size scriptsize
+(:import 
+\emph on
+obj pos str-file-name
+\emph default
+)
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\size scriptsize
+parameter
+\family typewriter
+\series default
+ 
+\family default
+\emph on
+obj:
+\family typewriter
+\emph default
+ widget (entry)
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\size scriptsize
+parameter
+\family typewriter
+\series default
+ 
+\family default
+\emph on
+pos:
+\family typewriter
+\emph default
+ position "0"...
+ or "end"
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\size scriptsize
+parameter
+\family typewriter
+\series default
+ 
+\family default
+\emph on
+str-file-name:
+\family typewriter
+\emph default
+ string denoting a file path
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+\size scriptsize
+ 
+\end_layout
+
+\begin_layout Standard
+Imports the content of a text file named in 
+\emph on
+str-file-name
+\emph default
+ into the widget described by 
+\emph on
+obj-name
+\emph default
+.
+ Normally a 
+\family typewriter
+\size scriptsize
+Scrolledtext
+\family default
+\size default
+ area.
+ 
+\end_layout
+
+\begin_layout Description
+example 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+\size scriptsize
+(:import tx "end" "readme.txt")
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+\size scriptsize
+;; --> tcltk:  ".tx import 
+\backslash
+"readme.txt
+\backslash
+" end"
+\end_layout
+
+\begin_layout Paragraph
+
+\family typewriter
 Window:insert
 \end_layout
 

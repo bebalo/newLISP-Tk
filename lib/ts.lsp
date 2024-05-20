@@ -334,11 +334,11 @@
 ## example:
 ## set filename "readme.txt"
 ## .fr.tx import $filename end
-;; @syntax (:import <obj-name> <str-file-name> <pos>)
+;; @syntax (:import <obj-name> <str-pos> <str-file-name> )
 ;;
 ;; @param <obj-name> widget (entry)
-;; @param <str-file-name> string denoting a file path
 ;; @param <str-pos> position "0"... or "end"
+;; @param <str-file-name> string denoting a file path
 ;;
 ;; Imports the content of a text file named in <str-file-name> into
 ;; the widget described by <obj-name>.  Normally a Scrolledtext area.
