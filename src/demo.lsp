@@ -2,7 +2,7 @@
 ## Time-stamp: <2024-05-19 16:10:55 paul>
 
 (constant (global 'LIBS)
-          (string (env "HOME") "/.local/newLISP/newlisp-tk/lib/"))
+          (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
 
 (load (string LIBS "ts.lsp")) ;GUI-Server ’ts (interface)
 
