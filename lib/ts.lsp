@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-21 15:11:04 paul>"))
+		  "<, Time-stamp: <2024-05-22 00:52:37 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -21,6 +21,8 @@
 
 (constant (global 'LIBS)
           (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
+(constant (global 'nl) "\n")
+
 ## ------- INIT/IMPORT -----------------------------------------------
 ;; (load (string LIBS "Tk.lsp"))     ;(context 'Tk)
 ;; (load (string LIBS "msg.lsp"))    ;interface to Tcl/Tk message boxes 
@@ -79,8 +81,10 @@
       (MAIN:assert
        (member
         (and (list? (self)) (not (empty? (self))) (first (self)))
-        '(Label Labelframe Window Frame Button Entry Checkbutton Scrolledtext)) ;objects known so far
-       "_build-tk-name: argument is not a known object")
+        '(Label Labelframe Window Frame Button Entry Checkbutton
+                Scrolledtext Notebook)) ;objects known so far
+       (string "_build-tk-name: argument "
+               (first (self)) " is not a known object"))
       
       (setq nn (assoc Name   (self)))   ;objetc's own Name
       (when nn (setq e (rest nn)))      ;part of result
@@ -761,7 +765,7 @@
       (setq name-string (:build-tk-name (self)))
       (setq widget-string
             (string "ttk::frame " name-string ))
-      ;; (println "Frame:build.widget-string:" nl widget-string) 
+      ;; (println "Frame:build.widget-string: " nl widget-string) 
       (Tk widget-string) ; ==> send to Tk
       ));Frame:build
 
@@ -808,13 +812,45 @@
       (Tk widget-string) ; ==> send to Tk
       ));Scrolledtext:build
 
+
+
+## -------------------------------------------------------------------
+(new 'Window 'Notebook)
+(define (Notebook:build)
+   [text]
+   [/text]
+   (let (name-string ""   widget-string ""   text-string "")
+      (setq name-string  (:build-tk-name (self))) 
+      (setq widget-string (string "ttk::notebook " name-string))
+      ;; (println "Notebook:build.widget-string:" nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      );let
+   );Label:build
+
+
+(define (Notebook:add-frame frm text) 
+   "add a frame to it's parent notebook "
+   ;; (MAIN:assert (and (list? frm) (string? text)) )
+   (let (name-string ""  frm-name "" widget-string "")
+      (setq name-string (:build-tk-name (self)))
+      (setq frm-name (:build-tk-name frm))
+      (setq widget-string
+            (string name-string
+                    " add"
+                    " " frm-name
+                    " -text \"" text "\""))
+      ;; (println "Notebook:add-frame.widget-string:" nl widget-string)
+      (Tk widget-string)
+      ));Notebook:add-frame
+
+
+
 ## -------------------------------------------------------------------
 ## not yet done:
 (new 'Window 'Radiobutton)
 (new 'Window 'Menubutton)
 (new 'Window 'Listbox)
 (new 'Window 'Combobox)
-(new 'Window 'Notebook)
 
 ## ------------------------------------------------------------------------
 ## Parameters/Options as Classes:
