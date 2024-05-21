@@ -124,7 +124,7 @@ initials
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -154,7 +154,7 @@ kern-.1emB
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -174,7 +174,7 @@ textsf{python}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -194,7 +194,7 @@ textsf{tkinter}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -214,7 +214,7 @@ textsf{newLISP/Tk}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -234,7 +234,7 @@ textsf{Tcl/Tk}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -254,7 +254,7 @@ textsf{newLISP}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -276,7 +276,7 @@ footnotesize rsync}}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -298,7 +298,7 @@ textbf{Semada}}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -318,7 +318,7 @@ textsc{Semada}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -342,7 +342,7 @@ scriptsize{}wish}}}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -358,7 +358,7 @@ begin{multicols}{2}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -376,7 +376,7 @@ end{multicols}
 
 \size small
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -392,7 +392,7 @@ columnbreak{}
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Alt+a 1 Teil
@@ -453,7 +453,7 @@ Schreibmaschine
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -469,7 +469,7 @@ pagenumbering{gobble}% Remove page numbers (and reset to 1)
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -485,7 +485,7 @@ thispagestyle{empty}
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 shift+F1 setzen einer Marke — Strg+1 springen zur Marke
@@ -512,7 +512,7 @@ shift+F9 setzen einer Marke — Strg+9 springen zur Marke
 \begin_layout Title
 Experimental 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -532,7 +532,7 @@ Version 0.1
 
 \begin_layout Author
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -550,7 +550,7 @@ PdB
 
 \size small
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -563,7 +563,7 @@ noindent{}
 
 This text describes an experimental interface, designed to build 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -576,7 +576,7 @@ tcl{}
 
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -588,7 +588,7 @@ Tcl/Tk
 
  GUIs controlled from 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -601,7 +601,7 @@ nL
 
 , similar to 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -614,7 +614,7 @@ py
 
 's 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -630,12 +630,12 @@ tki{}
 \size default
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -668,7 +668,7 @@ nL
 \series bold
 The only 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -681,7 +681,7 @@ tcl{}
 
  geometry-manager available here is GRID
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -703,7 +703,7 @@ GRID
 
 \begin_layout Abstract
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -716,7 +716,7 @@ noindent{}
 
 It is a small subset of what 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -740,7 +740,7 @@ Linux
 \family sans
 LMDE5
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -780,7 +780,7 @@ Disclaimer:
 \begin_layout Quote
 Experimental 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -798,7 +798,7 @@ nL
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -814,7 +814,7 @@ pagenumbering{arabic}% Arabic page numbers (and reset to 1)
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -839,7 +839,7 @@ LatexCommand tableofcontents
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -855,7 +855,7 @@ thispagestyle{empty}
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -867,14 +867,6 @@ clearpage
 \end_inset
 
 
-\end_layout
-
-\begin_layout Part
-Current state
-\end_layout
-
-\begin_layout Standard
-May 19, 2024
 \end_layout
 
 \begin_layout Description
@@ -907,7 +899,7 @@ This installation has been done on Linux (LMDE5).
 \begin_layout Labeling
 \labelwidthstring MMMMMMM
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -920,7 +912,7 @@ nL{}
 
  
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -934,7 +926,7 @@ nL{}
  needs to be installed.
  The 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -964,7 +956,7 @@ tcl
 \size default
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 7M
@@ -974,7 +966,7 @@ status open
 
 Then we need to install 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -987,7 +979,7 @@ tcl{}
 
  including 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1002,7 +994,7 @@ wi{}
  Version is 8.6.11-2.
  
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1019,7 +1011,7 @@ Tcl
 \family default
  interpreter currently part of the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1106,7 +1098,7 @@ A program using the interface described here is made up of 4 layers:
 \size default
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 7M
@@ -1117,7 +1109,7 @@ status open
 top-level application to perform a GUI-based interaction with the user.
  Written in 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1175,7 +1167,7 @@ translator
 
 -layer, which translates 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1188,7 +1180,7 @@ nL
 
 -statements of our application into 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1201,7 +1193,7 @@ tcl
 
 -language strings being sent to 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1225,7 +1217,7 @@ language
 \emph default
  for our application, similar to 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1238,7 +1230,7 @@ py
 
 's 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1252,7 +1244,7 @@ tki{}
  which was kind of a template for this.
  It is written in 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1292,7 +1284,7 @@ engine
 
  used to send and receive information (waiting for output written from 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1305,7 +1297,7 @@ wi{}
 
 ) between 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1325,7 +1317,7 @@ ts.lsp
 .
  It launches the process 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1369,7 +1361,7 @@ Tk.lsp
 \size default
  is written in 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1397,7 +1389,7 @@ nL
 \noindent
 \align block
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1410,7 +1402,7 @@ wi{}
 
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 7M
@@ -1420,7 +1412,7 @@ status open
 
 process 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1445,7 +1437,7 @@ Status: May 20, 2024
 \begin_layout Standard
 The 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1580,7 +1572,7 @@ hello world
  program, which is used to show that the basic components work.
  It's a label and a button using the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1861,7 +1853,7 @@ btn-end
 \begin_layout Standard
 In line 1
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1874,7 +1866,7 @@ footnote{The line numbers are not part of the program.}
 
  we tell the system where to find 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1945,7 +1937,7 @@ yes
 \begin_layout Standard
 In line 14 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1983,7 +1975,7 @@ setw
 \size default
 -function sends it to 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2056,7 +2048,7 @@ listening
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2089,7 +2081,7 @@ rsync
  program available on Unix-like systems.
  The idea for this program is to use 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2102,7 +2094,7 @@ rs{}
 
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 rsync
@@ -2118,7 +2110,7 @@ backup
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 backup
@@ -2168,7 +2160,7 @@ iwidgets4
 \begin_layout Standard
 which, besides others, are provided by 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2192,7 +2184,7 @@ ts.lsp
 \begin_layout Standard
 The previous version was written in 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2205,7 +2197,7 @@ py{}
 
 , using 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2226,7 +2218,7 @@ tki
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -2257,7 +2249,7 @@ backup-GUI
 \begin_layout Standard
 Now we try to build it again using 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2469,7 +2461,7 @@ ts.lsp
 \size default
  and 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2494,7 +2486,7 @@ pipes
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 pipes
@@ -2521,7 +2513,7 @@ ts.lsp
 \size default
  and 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2541,7 +2533,7 @@ Communications
 
 \begin_layout Subsubsection
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2568,7 +2560,7 @@ syntax: (pipe)
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2608,7 +2600,7 @@ but it does block reading until bytes are available.
  A read blocks when fewer characters than specified are available from a
  pipe that has not had the writing end closed by all processes.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 (http://www.newlisp.org/downloads/manual_frame.html), with my italics
@@ -2636,7 +2628,7 @@ int-handle
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2675,7 +2667,7 @@ int-file
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2750,7 +2742,7 @@ syntax: (current-line)
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -2993,7 +2985,7 @@ wish
 .
  In 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3233,7 +3225,7 @@ Tk:Tk
 \size default
  and the process 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3247,7 +3239,7 @@ wi{}
 .
  It sets up at least two pipes and starts the process 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3344,7 +3336,7 @@ write-line
 \series default
  Tk:myout <
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3399,7 +3391,7 @@ Tk:mainloop
 \begin_layout Standard
 We need to get the information coming from the GUI, from 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3412,7 +3404,7 @@ wi{}
 
  using 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3433,7 +3425,7 @@ read-line
 \size default
  function and interpret it using 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3493,7 +3485,7 @@ command
 \size default
  attached to it, this command (a 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3561,7 +3553,7 @@ ts.lsp
 \size default
  defines an interface between the users application and 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3633,7 +3625,7 @@ Status: May 11, 2024
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3652,12 +3644,12 @@ FOOP-Classes
 \emph default
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3675,7 +3667,7 @@ nL
 
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 FOOP-Classes
@@ -3973,7 +3965,7 @@ ts:setw
 This function not only establishes the widget-description, but also creates
  a new 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -3987,7 +3979,7 @@ nL
 -symbol from the Name-option given.
  In this example a 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4062,7 +4054,7 @@ ts.lsp
 \size default
 , when building a 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4119,7 +4111,7 @@ obj
 \begin_layout Standard
 This method builds the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4253,7 +4245,7 @@ obj
 , this method uses the Name and Parent information of the objects used in
  the Name-Parent-chain to build a name using the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4272,7 +4264,7 @@ tcl
 Example: Assuming a window, frame and a label is given, this method produces
  a 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4373,7 +4365,7 @@ l") (Text "Field 1"))
 \size scriptsize
 ".frm.lbl"                  ;--> 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -4473,7 +4465,7 @@ example
 \begin_layout Standard
 This will lead to the following 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5545,7 +5537,7 @@ ts:ask-directory
 \begin_layout Standard
 Use the 
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5732,7 +5724,7 @@ noprefix "false"
 \begin_layout Standard
 <<<<<<<<<<<
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5770,7 +5762,7 @@ Tk-variables
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Tk-variables
@@ -5823,7 +5815,7 @@ TkVar
 \size default
  to hold those variables: 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 LyX-Code, Größe: sehr klein
@@ -5924,7 +5916,7 @@ throw-error
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5982,7 +5974,7 @@ setq
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -6016,7 +6008,7 @@ add more widgets and options
 \end_layout
 
 \begin_layout Itemize
-add more examples using the available widgets
+add more examples using the available widgets:
 \end_layout
 
 \begin_deeper
@@ -6025,7 +6017,7 @@ add more examples using the available widgets
 \end_layout
 
 \begin_layout Itemize
-☐ Entry 
+☒ Entry
 \end_layout
 
 \begin_layout Itemize
@@ -6049,12 +6041,8 @@ add more examples using the available widgets
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-Not yet done:
-\end_layout
-
 \begin_layout Itemize
-widgets
+widgets not yet done:
 \end_layout
 
 \begin_deeper

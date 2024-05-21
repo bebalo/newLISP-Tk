@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-21 12:02:11 paul>"))
+		  "<, Time-stamp: <2024-05-21 15:11:04 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -522,21 +522,25 @@
 (define (Label:build)
    [text]
    Build Tcl/Tk-string describing the Label-object.  Example:
-   (Label (Name "lb1") (Text "Field 1") (Grid (Row 0) (Column 0)))
+   (Label (Name "lb1") (Text "Field 1") )
    Using :build this will be translated to: 
    "ttk::label .lb1 -text \"Field 1\""
    [/text]
    (let (name-string ""   widget-string ""   text-string "")
-      (setq name-string  (:build-tk-name (self))) ;.{<parent-name>.}<label-name>
+      (setq name-string  (:build-tk-name (self))) 
+      (setq widget-string (string "ttk::label " name-string))
       (when (assoc Text (self))                   ;Label Text
-         (setq text-string            
-               (string
+         (setq widget-string            
+               (string widget-string
                 " -text" 
                 " \"" (last (assoc Text (self))) "\""
-                ))
-         (setq widget-string (string "ttk::label "
-                                     name-string text-string))
-         );when
+                )))
+      (when (assoc Textvariable (self))
+         (setq widget-string
+               (string widget-string
+                       " -textvariable "
+                       (last (assoc Textvariable (self)))
+                       )))
       ;; (println "Label:build.widget-string: " widget-string)
       (Tk widget-string) ; ==> send to Tk
       );let
@@ -902,7 +906,9 @@
    (if (not (and (string? name) (string? val)))
        (throw-error "ts:setVar arguments must both be of type string"))
    (TkVar name val)                     ;now we know it's value
-   (Tk "set " name " " val)             ;send it to Tk 
+   ;; (println "ts:setVar.Tk-string: " "set " name " " "\"" val "\"")
+   (Tk "set " name " "
+       "\"" val "\"")             ;send it to Tk 
    );ts:setVar
 
 
