@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-20 19:52:15 paul>"))
+		  "<, Time-stamp: <2024-05-21 08:40:39 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -22,8 +22,8 @@
 (constant (global 'LIBS)
           (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
 ## ------- INIT/IMPORT -----------------------------------------------
-(load (string LIBS "Tk.lsp"))     ;(context 'Tk)
-(load (string LIBS "msg.lsp"))    ;interface to Tcl/Tk message boxes 
+;; (load (string LIBS "Tk.lsp"))     ;(context 'Tk)
+;; (load (string LIBS "msg.lsp"))    ;interface to Tcl/Tk message boxes 
 
 ## ------- GLOBAL VARs ---------------------------------------------------
 (set (global 'hh) "")                 ;place holder for tcltk variable

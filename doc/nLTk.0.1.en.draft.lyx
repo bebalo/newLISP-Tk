@@ -4611,12 +4611,20 @@ str-file-name:
 
 \begin_layout Standard
 Imports the content of a text file named in 
+\family typewriter
+\size scriptsize
 \emph on
 str-file-name
+\family default
+\size default
 \emph default
  into the widget described by 
+\family typewriter
+\size scriptsize
 \emph on
-obj-name
+obj
+\family default
+\size default
 \emph default
 .
  Normally a 
