@@ -6019,6 +6019,66 @@ add more widgets and options
 add more examples using the available widgets
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+☒ Label
+\end_layout
+
+\begin_layout Itemize
+☐ Entry 
+\end_layout
+
+\begin_layout Itemize
+☒ Button
+\end_layout
+
+\begin_layout Itemize
+☒ Scrolledtext (using Frame)
+\end_layout
+
+\begin_layout Itemize
+☒ demo using a messagebox
+\end_layout
+
+\begin_layout Itemize
+☐ Checkbutton
+\end_layout
+
+\begin_layout Itemize
+☐ Labelframe
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Not yet done:
+\end_layout
+
+\begin_layout Itemize
+widgets
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Radiobutton
+\end_layout
+
+\begin_layout Itemize
+Menubutton
+\end_layout
+
+\begin_layout Itemize
+Listbox
+\end_layout
+
+\begin_layout Itemize
+Combobox
+\end_layout
+
+\begin_layout Itemize
+Notebook
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 options:
 \end_layout

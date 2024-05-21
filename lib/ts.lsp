@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-21 11:02:05 paul>"))
+		  "<, Time-stamp: <2024-05-21 12:02:11 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -452,6 +452,33 @@
       ));Window:configure
 
 
+(define (Window:focus)
+   "set focus on widget"
+   (let (name-string "" widget-string "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq widget-string
+            (string "focus "
+                    name-string
+                    ))
+      ;; (println "Window:focus.widget-string: " widget-string)
+      (Tk widget-string)
+      ));Window:focus
+
+
+(define (Window:selection from-index (to-index "end"))
+   "select content of a widget" ;.en selection range 0 end
+   (let (name-string "" widget-string "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq widget-string
+            (string 
+             name-string
+             " selection"
+             " range " from-index " " to-index
+             ))
+      ;; (println "Window:selection.widget-string: " widget-string)
+      (Tk widget-string)
+      ));Window:focus
+
 ## ===================================================================
 ## Sub-Classes with inherited methods from 'Window:
 
@@ -848,7 +875,6 @@
 (new Class 'Padx)
 (new Class 'Pady)
 (new Class 'Grid)
-(new Class 'Focus)                 
 (new Class 'Column)
 (new Class 'Columnspan)
 (new Class 'Row)
