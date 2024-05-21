@@ -4,9 +4,9 @@
 (constant (global 'LIBS)
           (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
 
-(load (string LIBS "Tk.lsp")) ;GUI-Server ’ts (interface)
+(load (string LIBS "Tk.lsp")) ;GUI-Server ’Tk (interface)
 (load (string LIBS "ts.lsp")) ;GUI-Server ’ts (interface)
-(load (string LIBS "msg.lsp")) ;GUI-Server ’ts (interface)
+(load (string LIBS "msg.lsp")) ;GUI-Server ’msg (interface)
 
 (define (MAIN:end)                      ;handler for quit-button
    (let (res "no")                      ;"no"/"yes"
