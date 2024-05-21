@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-21 08:40:39 paul>"))
+		  "<, Time-stamp: <2024-05-21 11:02:05 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -425,22 +425,24 @@
 (define (Window:configure )
    "change attribute of object/widget"
    (let (name-string "" widget-string "" option-string "")
+      (MAIN:assert (not (empty? (args))) ":configure needs an argument")
       (setq name-string  (:build-tk-name (self)))
       (setq widget-string
             (string name-string
                     " configure "
                     ))
-      (when (assoc State (self))
+      (when (assoc State (args))
          (setq option-string
                (string " -state "
-                       (last (assoc State (self))) ))
+                       (last (assoc State (args))) ))
          (setq widget-string
                (string widget-string option-string))
          );when
-      (when (assoc Text (self))
+      (when (assoc Text (args))
          (setq option-string
                (string " -text "
-                       (last (assoc Text (self))) ))
+                       "\""(last (assoc Text (args)))"\""
+                       ))
          (setq widget-string
                (string widget-string option-string))
          );when
