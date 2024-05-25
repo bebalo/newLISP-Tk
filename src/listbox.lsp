@@ -1,5 +1,5 @@
 #!/usr/bin/env newlisp
-## Time-stamp: <2024-05-21 09:34:36 paul>
+## Time-stamp: <2024-05-25 07:52:08 paul>
 
 (constant (global 'LIBS)
           (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
@@ -11,6 +11,14 @@
 (define (MAIN:end)
    (ts:quit));end
 
+(setq mylist
+      '("hugo" "fritz" "anna" "lena" "alex" "marie" "peter" "claudia"
+        "ulrike" "jonas"))
+
+(setq str (join mylist " "))
+(setq str-tk (string "set Liste {" str "} "))
+
+## ---------------- GUI --------------------------------------------------
 
 (Tk:init)
 
@@ -21,21 +29,19 @@
 
 ## -----------------------------------------------------------------------
 
-(ts:setw (Frame (Name "fr")))
-(:build fr)                          ;grid .fr -row 0 -column 0
-(:setgrid fr (Row 0) (Column 0)) 
+;; (ts:setw (Frame (Name "frme")))
+;; (:build frme)
+;; (:setgrid frme (Row 0) (Column 0))
 
-(ts:setw (Scrolledtext (Parent "fr") (Name "tx") (Width 600) (Height 400)
-                       (Wrap "word") ; none, char, word
-                       (State "normal")))
-(:build tx)
-(:setgrid tx (Padx 10) (Pady 10) (Sticky "nesw"))
-
-(:insert tx "1.0" "editable")
-
-;; or:
-
-;; (:import tx "end" "readme.txt")
+(Tk str-tk )
+##listbox .lbox -listvariable Liste -selectmode extended
+(ts:setw (Listbox (Name "lbox") ; (Parent "frme")
+                  (Width 20) (Height 20)
+                  (Listvariable "Liste")
+                  (Selectmode "extended")
+                  ))
+(:build lbox)
+(:setgrid lbox (Row 0) (Column 0))
 
 ## -----------------------------------------------------------------------
 

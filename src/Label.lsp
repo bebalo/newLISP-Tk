@@ -26,7 +26,7 @@
 
 ## -----------------------------------------------------------------------
 
-(ts:setw (Label (Name 'lbl) (Text "This is a short text"))) ;define label
+(ts:setw (Label (Name "lbl") (Text "This is a short text"))) ;define label
 (:build lbl)                  ;(Label:build lb1) send to Tk
 (:setgrid lbl (Row 0) (Column 0)
           (Padx 5) (Pady 10) (Sticky "e")) ;position

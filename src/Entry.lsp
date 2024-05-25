@@ -32,24 +32,24 @@
 ;; (:build win)
 
 ## -----------------------------------------------------------------------
-(ts:setw (Label (Name 'lbl2) (Text "Name given"))) ;define label
+(ts:setw (Label (Name "lbl2") (Text "Name given"))) ;define label
 (:build lbl2)
 (:setgrid lbl2 (Row 1) (Column 0)
           (Padx 5) ; (Pady 10) (Sticky "e") ;position
           )
 
-(ts:setw (Button (Name 'show) (Text "show-it") (Command "showText")))
+(ts:setw (Button (Name "show") (Text "show-it") (Command "showText")))
 (:build show)
 (:setgrid show (Row 1) (Column 1) (Padx 5) (Pady 5))
 
 
-(ts:setw (Label (Name 'lbl) (Text "Name:"))) ;define label
+(ts:setw (Label (Name "lbl") (Text "Name:"))) ;define label
 (:build lbl)
 (:setgrid lbl (Row 0) (Column 0)
           (Padx 5) ; (Pady 10) (Sticky "e") ;position
           )
 
-(ts:setw (Entry (Name 'en) ; (Width 80)
+(ts:setw (Entry (Name "en") ; (Width 80)
                 (Textvariable "NameText")
                 ))
 (:build en) 

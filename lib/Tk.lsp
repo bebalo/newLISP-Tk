@@ -1,6 +1,8 @@
 (global 'MAIN:PID)
+(context MAIN)
+(set (global 'started) nil)             ;mainloop not yet started
 (context 'Tk) 
-(constant 'TK "Time-stamp: <2024-05-18 17:15:55 paul>")
+(constant 'TK "Time-stamp: <2024-05-24 21:57:28 paul>")
 ## Emacs: use >Alt-x time-stamp< to update the above line 
 ##########################################################################
 ;; @module Tk.lsp 
@@ -113,6 +115,8 @@
    example:
    (Tk "bind . <Destroy> {puts {(exit)}}")
    [/text]
+   ;; (println "Tk:Tk:(args): " nl (args))
+   ;; (println "Tk:Tk:(apply string (args)): " nl (apply string (args)))
    (write-line
     myout
     (append "if { [catch {puts [" (apply string (args)) "] }] } {" 
@@ -135,9 +139,19 @@
 ;; (exit) the application.
 ##------------------------------------------------------------------------
 (define (Tk:mainloop)           
-   (let (cl "")
+   (let (cl "" pwd "4Osya" )
+      ;; (println "Tk:mainloop.peek0: " (peek myin))
+      (unless MAIN:started
+         (Tk "puts \"" pwd "\"")        ;send start signal ("password")
+         (do-while (!= (current-line) pwd)
+            (read-line myin)
+            ;; (println "Tk:mainloop.peek: " (current-line))
+            )
+         (setq MAIN:started true)) ;start signal was read, pipe is empty now
+      ;; mainloop
       (while (read-line myin)
          (setq cl (current-line))
+         ;; (println "Tk:mainloop.cl: " nl cl)
          (eval-string cl);<========================
          )));Tk:mainloop
 

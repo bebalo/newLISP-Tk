@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-22 00:52:37 paul>"))
+		  "<, Time-stamp: <2024-05-24 21:09:17 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -31,6 +31,8 @@
 (set (global 'hh) "")                 ;place holder for tcltk variable
 
 
+
+## ------- functions -----------------------------------------------------
 (define (assert condition (message "User-Error"))
    (unless condition
       (throw-error message)
@@ -71,30 +73,35 @@
 
 (define (Window:build-tk-name)             ;cover function
    "build a name in Tcl/Tk-syntax"
-   (string "."
-           (join (map string (:_build-tk-name (self))) "."))
-   );build-name
+   (let (erg)
+      (setq erg
+            (string "."
+                    (join (map string (:_build-tk-name (self))) ".")))
+      ;; (println nl "build-tk-name.erg: " erg)
+      ));build-name
 
 
-(define (Window:_build-tk-name )
-   (let (e '() nn '() pp '())
+(define (Window:_build-tk-name);_build-tk-name ==> list?
+   (let (erg '() nn '() pp '() par "")
       (MAIN:assert
        (member
         (and (list? (self)) (not (empty? (self))) (first (self)))
         '(Label Labelframe Window Frame Button Entry Checkbutton
-                Scrolledtext Notebook)) ;objects known so far
+                Scrolledtext Notebook Listbox)) ;objects known so far
        (string "_build-tk-name: argument "
                (first (self)) " is not a known object"))
       
       (setq nn (assoc Name   (self)))   ;objetc's own Name
-      (when nn (setq e (rest nn)))      ;part of result
+      (when (assoc Name (self)) (setq erg (rest nn)))      ;part of result
       (setq pp (assoc Parent (self))) 
       (when (not (nil? pp))             ;Parent name given
-         (if (eval (last pp))           ;Parent exists
-             (setq e (append (:_build-tk-name (eval (last pp))) e )) ;recursion
-             (setq e (append (map term (rest pp)) e)) ;no recursion, use it as it is
+         (setq par (eval (sym (last pp) MAIN))) ;parent's value
+         (if par                                ;Parent exists
+             (setq erg (append (:_build-tk-name par) erg )) ;recursion
+             (setq erg (append (map term (rest pp)) erg)) ;no recursion, use it as it is
              ));when
-      e
+      ;; (println "_build-tk-name.erg: " erg nl)
+      erg
       ));_build-tk-name
 
 
@@ -483,6 +490,26 @@
       (Tk widget-string)
       ));Window:focus
 
+
+;; tcltk:
+;; pack [label .l -text "Hover your mouse over me!"]
+;; tooltip::tooltip .l "I'm a helpful hint!"
+(define (Window:tooltip text)
+   "tcltk's tooltip"
+   (let (name-string "" text-string "")
+      ;; (println ":tooltip.(self): " (self))
+      (setq name-string (:build-tk-name (self)))
+      ;; (println ":tooltip.name-string: " name-string)
+      ;; tooltip::tooltip .l "I'm a helpful hint!"
+      (setq text-string
+            (string "tooltip::tooltip " name-string " \"" text "\""))
+      ;; (println ":tooltip.text-string: " text-string)
+      (Tk text-string)
+      ));ts:tooltip
+
+
+
+
 ## ===================================================================
 ## Sub-Classes with inherited methods from 'Window:
 
@@ -825,7 +852,7 @@
       ;; (println "Notebook:build.widget-string:" nl widget-string)
       (Tk widget-string) ; ==> send to Tk
       );let
-   );Label:build
+   );Notebook:build
 
 
 (define (Notebook:add-frame frm text) 
@@ -846,10 +873,44 @@
 
 
 ## -------------------------------------------------------------------
+(new 'Window 'Listbox)
+(define (Listbox:build)
+   [text]
+   listbox .lbox -listvariable Liste -selectmode extended
+   [/text]
+   (let (name-string ""   widget-string ""   option-string "")
+      (println "Listbox:build.(self):" nl (self))
+      (setq name-string  (:build-tk-name (self))) 
+      (setq widget-string (string "ttk::listbox " name-string))
+      (setq widget-string
+            (string "listbox " name-string))
+      (when (assoc Listvariable (self))
+         (setq option-string
+               (string " -listvariable " (last (assoc Listvariable (self)))))
+         (setq widget-string (string widget-string option-string)))
+      (when (assoc Selectmode (self))
+         (setq option-string
+               (string " -selectmode " (last (assoc Selectmode (self)))))
+         (setq widget-string (string widget-string option-string)))
+      (when (assoc Width (self))
+         (setq option-string
+               (string " -width " (last (assoc Width (self)))))
+         (setq widget-string (string widget-string option-string)))
+      (when (assoc Height (self))
+         (setq option-string
+               (string " -height " (last (assoc Height (self)))))
+         (setq widget-string (string widget-string option-string)))
+      (println "Listbox:build.widget-string:" nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      );let
+   );Listbox:build
+
+
+
+## -------------------------------------------------------------------
 ## not yet done:
 (new 'Window 'Radiobutton)
 (new 'Window 'Menubutton)
-(new 'Window 'Listbox)
 (new 'Window 'Combobox)
 
 ## ------------------------------------------------------------------------
@@ -891,19 +952,19 @@
 
 
 (new Class 'Parent)
-(define (Parent:Parent)
-   [text]
-   widget name, make sure it will come out as a symbol.
-   (Parent "Hugo") -> (Parent Hugo)
-   [/text]
-   (let (l '())
-      (setq l
-            (map (lambda (x)
-                    (or (and (string? x)
-                             (sym x 'MAIN)) ;make symbol if it's a string
-                        x))                 ;or else leave it as it is
-                 (args)))
-      (cons (context) l)));Parent:Parent
+;; (define (Parent:Parent)
+;;    [text]
+;;    widget name, make sure it will come out as a symbol.
+;;    (Parent "Hugo") -> (Parent Hugo)
+;;    [/text]
+;;    (let (l '())
+;;       (setq l
+;;             (map (lambda (x)
+;;                     (or (and (string? x)
+;;                              (sym x 'MAIN)) ;make symbol if it's a string
+;;                         x))                 ;or else leave it as it is
+;;                  (args)))
+;;       (cons (context) l)));Parent:Parent
 
 
 ## --- Parameters/Options as Classes, continued --------------------------
@@ -912,6 +973,7 @@
 (new Class 'Title)
 (new Class 'Text)
 (new Class 'Textvariable)
+(new Class 'Listvariable)
 (new Class 'Padx)
 (new Class 'Pady)
 (new Class 'Grid)
@@ -926,12 +988,23 @@
 (new Class 'Relief)
 (new Class 'Borderwidth)
 (new Class 'Labelanchor)
+(new Class 'Selectmode)
 (new Class 'Sticky)
 (new Class 'Wrap)
 
 
 ## ----------- ts - LOCAL FUNCTIONS --------------------------------------
 (context 'ts)
+
+(define (ts:require tklib)
+   [text](ts:require "tooltip")
+   tcltk:
+   package require tooltip[/text]
+   (MAIN:assert (string? tklib) "require: arg must be a string")
+   (let (tk-string (string "package require " tklib))
+      (println "ts:require: >" tk-string "<")
+      (Tk tk-string)));ts:require
+
 
 ;; use widget-variables to retrieve their actual values
 ;; Use a dictionary for these variables.

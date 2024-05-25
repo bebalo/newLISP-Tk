@@ -1,5 +1,5 @@
 #!/usr/bin/env newlisp
-## Time-stamp: <2024-05-21 09:35:45 paul>
+## Time-stamp: <2024-05-22 07:57:01 paul>
 
 (constant (global 'LIBS)
           (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
@@ -26,34 +26,34 @@
 
 ## -----------------------------------------------------------------------
 
-(ts:setw (Notebook (Name 'nb) ))
+(ts:setw (Notebook (Name "nb") ))
 (:build nb)
 (:setgrid nb (Row 0) (Column 0))
 
-(ts:setw (Frame (Parent 'nb) (Name 'fr1) (Width 200) (Height 200)))
+(ts:setw (Frame (Name "fr1") (Parent "nb")  (Width 200) (Height 200)))
 (:build fr1)
-(ts:setw (Frame (Parent 'nb) (Name 'fr2)))
-(:build fr2)
+(:add-frame nb fr1 "Label 1") 
 
-(:add-frame nb fr1 "Reiter 1") 
-(:add-frame nb fr2 "Reiter 2")
+(ts:setw (Frame (Name "fr2") (Parent "nb") ))
+(:build fr2)
+(:add-frame nb fr2 "Label 2")
 
 
 ## ---- frame 1 -------
-(ts:setw (Label (Parent 'fr1) (Name 'lbl1)
-                (Text "Seite 1 und noch viel viel viel viel mehr") ; (Width 50)
+(ts:setw (Label (Parent "fr1") (Name "lbl1")
+                (Text "Page 1 and some text in it.") ; (Width 50)
                 ))
 (:build lbl1)
 (:setgrid lbl1 (Row 0) (Column 0) (Padx 10) (Pady 10))      ;make it visible
 
-(ts:setw (Button (Parent 'fr1) (Name 'btn1) (Text "Quit") (Command "end")))
+(ts:setw (Button (Parent "fr1") (Name "btn1") (Text "Quit") (Command "end")))
 (:build btn1)
 (:setgrid btn1 (Row 1) (Column 0))      ;make it visible
 
 
 ## ---- frame 2 -------
-(ts:setw (Label (Parent 'fr2) (Name 'fr2lbl1)
-                (Text "Seite 2 auch hier gibt es Text ohne Ende.") ; (Width 50)
+(ts:setw (Label (Parent "fr2") (Name "fr2lbl1")
+                (Text "Page 2: again som text here.") ; (Width 50)
                 ))
 (:build fr2lbl1)
 (:setgrid fr2lbl1 (Row 0) (Column 0) (Padx 10) (Pady 10))      ;make it visible

@@ -33,7 +33,7 @@
 
 ;; Ceckbutton
 (ts:setVar "cbtnVar" "0")               ;define & send it
-(ts:setw (Checkbutton (Name 'cbtn) (Text "show state")
+(ts:setw (Checkbutton (Name "cbtn") (Text "show state")
                       (Variable "cbtnVar")
                       (State "normal")  ;(State "disabled")
                       (Command "click")
@@ -44,7 +44,7 @@
 
 ;; Label
 (ts:setVar "Text" "") 
-(ts:setw (Label (Name 'lbl) (Textvariable "Text"))) ;define label
+(ts:setw (Label (Name "lbl") (Textvariable "Text"))) ;define label
 (:build lbl)                            ;(Label:build lb1) send to Tk
 (:setgrid lbl (Row 1) (Column 0)
           (Padx 5) (Pady 10) ; (Sticky "e")

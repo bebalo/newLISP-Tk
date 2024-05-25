@@ -1051,7 +1051,7 @@ tk
 tklib
 \family default
 \size default
- Version (0.7)
+ Version (0.7) includes tooltip-library
 \end_layout
 
 \begin_layout Labeling
@@ -3388,6 +3388,10 @@ It is called like this:
 Tk:mainloop 
 \end_layout
 
+\begin_layout Paragraph
+General:
+\end_layout
+
 \begin_layout Standard
 We need to get the information coming from the GUI, from 
 \begin_inset ERT
@@ -3538,6 +3542,222 @@ MAIN
 \family default
 \size default
 .
+\end_layout
+
+\begin_layout Paragraph
+Application start:
+\end_layout
+
+\begin_layout Standard
+Status: May 24, 2024.
+\end_layout
+
+\begin_layout Standard
+The interpreter 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+wi{}
+\end_layout
+
+\end_inset
+
+ responds to the definitions of our widgets by writing to its standard out,
+ which is our input pipe.
+ So, if we define a label named 
+\family typewriter
+\size scriptsize
+lbl
+\family default
+\size default
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+wi{}
+\end_layout
+
+\end_inset
+
+ will respond with the name of that label.
+ It will write it into our pipe (
+\family typewriter
+\size scriptsize
+Tk:myin
+\family default
+\size default
+).
+ This output would be evaluated by 
+\family typewriter
+\size scriptsize
+eval-string
+\family default
+\size default
+ giving meaningless or erroneous results, that might even stop the application.
+ For that reason the 
+\family typewriter
+\size scriptsize
+mainloop
+\family default
+\size default
+ function first clears the input pipe by sending a kind of a password (into
+ 
+\family typewriter
+\size scriptsize
+myout
+\family default
+\size default
+) and then it will perform a 
+\family typewriter
+\size scriptsize
+read-line
+\family default
+\size default
+ until this password is detected.
+ After that, our application is ready to start.
+ The actual version of 
+\family typewriter
+\size scriptsize
+Tk:mainloop
+\family default
+\size default
+:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(
+\series bold
+define
+\series default
+ (Tk:mainloop)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+   (
+\series bold
+let
+\series default
+ (cl "" pwd "4Osya")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+      (
+\series bold
+unless
+\series default
+ MAIN:started
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+         (Tk "puts 
+\backslash
+"" pwd "
+\backslash
+"")   ;send start signal
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+         (
+\series bold
+do-while
+\series default
+ (!= (
+\series bold
+current-line
+\series default
+) pwd)    
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+            (
+\series bold
+read-line
+\series default
+ myin))      ;clearing the pipe
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+         (
+\series bold
+setq
+\series default
+ MAIN:started 
+\series bold
+true
+\series default
+)) ;start signal was read, pipe is empty now
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+      ;; mainloop
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+      (
+\series bold
+while
+\series default
+ (
+\series bold
+read-line
+\series default
+ myin)      ;waiting for an event
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+         (
+\series bold
+setq
+\series default
+ cl (
+\series bold
+current-line
+\series default
+))
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+         (
+\series bold
+eval-string
+\series default
+ cl)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+         )));Tk:mainloop
 \end_layout
 
 \begin_layout Section
@@ -5377,6 +5597,78 @@ set useOptions 0
 \end_layout
 
 \begin_layout Subsubsection
+Listbox – Methods
+\end_layout
+
+\begin_layout Standard
+Status: May 25, 2024
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(
+\series bold
+new
+\series default
+ 'Window 'Listbox)
+\end_layout
+
+\begin_layout Paragraph
+
+\family typewriter
+Listbox:build
+\end_layout
+
+\begin_layout Standard
+Builds a listbox
+\begin_inset space ~
+\end_inset
+
+\SpecialChar ldots
+
+\end_layout
+
+\begin_layout Description
+syntax 
+\family typewriter
+\size scriptsize
+(:build 
+\emph on
+obj
+\emph default
+)
+\end_layout
+
+\begin_layout Description
+options 
+\end_layout
+
+\begin_layout Itemize
+(Width <
+\emph on
+num
+\emph default
+>) 
+\end_layout
+
+\begin_layout Itemize
+(Height <
+\emph on
+num
+\emph default
+>)
+\end_layout
+
+\begin_layout Itemize
+(Listvariable "List")
+\end_layout
+
+\begin_layout Itemize
+(Selectmode "extended") – single | multiple | browse | extended 
+\end_layout
+
+\begin_layout Subsubsection
 Labelframe – Methods
 \end_layout
 
@@ -5417,6 +5709,26 @@ syntax
 obj
 \emph default
 )
+\end_layout
+
+\begin_layout Description
+options 
+\end_layout
+
+\begin_layout Itemize
+(Width 200) 
+\end_layout
+
+\begin_layout Itemize
+(Height 400)
+\end_layout
+
+\begin_layout Itemize
+(Listvariable "List")
+\end_layout
+
+\begin_layout Itemize
+(Selectmode "extended") – single | multiple | browse | extended 
 \end_layout
 
 \begin_layout Description
@@ -5993,6 +6305,42 @@ msg.lsp
 \end_layout
 
 \begin_layout Section
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+tcl{}
+\end_layout
+
+\end_inset
+
+ – notes
+\end_layout
+
+\begin_layout Standard
+Examples can be found in:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+/usr/share/doc/tklib/examples/*
+\end_layout
+
+\begin_layout Standard
+i.e.
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+/usr/share/doc/tklib/examples/scrollutil/BwScrollableFrmContent.tcl
+\end_layout
+
+\begin_layout Section
 next
 \end_layout
 
@@ -6033,6 +6381,10 @@ add more examples using the available widgets:
 \end_layout
 
 \begin_layout Itemize
+☒ Notebook
+\end_layout
+
+\begin_layout Itemize
 ☐ Checkbutton
 \end_layout
 
@@ -6060,10 +6412,6 @@ Listbox
 
 \begin_layout Itemize
 Combobox
-\end_layout
-
-\begin_layout Itemize
-Notebook
 \end_layout
 
 \end_deeper
