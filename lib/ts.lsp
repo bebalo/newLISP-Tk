@@ -812,7 +812,7 @@
       (setq name-string (:build-tk-name (self)))
       (setq widget-string
             (string "ttk::frame " name-string ))
-      (println "Frame.widget-string: " widget-string) 
+      ;; (println "Frame.widget-string: " widget-string) 
       (Tk widget-string) ; ==> send to Tk
       ));Frame:build
 
