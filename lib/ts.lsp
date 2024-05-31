@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-24 21:09:17 paul>"))
+		  "<, Time-stamp: <2024-05-30 22:37:40 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -86,8 +86,9 @@
       (MAIN:assert
        (member
         (and (list? (self)) (not (empty? (self))) (first (self)))
-        '(Label Labelframe Window Frame Button Entry Checkbutton
-                Scrolledtext Notebook Listbox)) ;objects known so far
+        '(Label Labelframe Window Frame Button Entry
+                Checkbutton Scrolledtext Notebook Listbox
+                Scrollbar)) ;objects known so far
        (string "_build-tk-name: argument "
                (first (self)) " is not a known object"))
       
@@ -434,31 +435,50 @@
 ;; 
 ;; (:configure <obj> (Text "new text")) 
 (define (Window:configure )
-   "change attribute of object/widget"
-   (let (name-string "" widget-string "" option-string "")
-      (MAIN:assert (not (empty? (args))) ":configure needs an argument")
+   [text
+   add and/or& change attribute of object/widget
+   (:configure <obj-name> <obj-option> ... )
+   [/text]
+   (let (name-string "" widget-string "" option-string "" cmd ""  conn "")
+      (MAIN:assert (not (empty? (args))) ":configure needs at least one argument")
       (setq name-string  (:build-tk-name (self)))
+      (doargs (item)                    ;Arguments
+         (when (or (= (first item) 'State)
+                   (= (first item) 'Text)
+                   (= (first item) 'Connect)
+                   (= (first item) 'Command))
+            (setf (self)
+                  (unique (push item (self) -1)))));add it
       (setq widget-string
             (string name-string
-                    " configure "
-                    ))
-      (when (assoc State (args))
+                    " configure " ))
+      (when (assoc State (self))
          (setq option-string
                (string " -state "
-                       (last (assoc State (args))) ))
+                       (last (assoc State (self))) ))
          (setq widget-string
                (string widget-string option-string))
          );when
-      (when (assoc Text (args))
+      (when (assoc Text (self))
          (setq option-string
                (string " -text "
-                       "\""(last (assoc Text (args)))"\""
-                       ))
+                       "\""(last (assoc Text (self)))"\"" ))
          (setq widget-string
                (string widget-string option-string))
          );when
+      (when (setq conn (assoc Connect (self)))
+         (when (setq cmd (assoc Command (self)))
+            (setq option-string
+                  (string "-command { "
+                          (:build-tk-name 
+                           (eval (sym (last conn) MAIN)))
+                          " " (last cmd) " }"
+                          ))
+            (setq widget-string
+                  (string widget-string option-string))
+            ));when
       ;; to be continued
-      ;; (println "Window:configure.widget-string:\n" widget-string)
+      ;; (println ":configure.widget-string9: " widget-string)
       (Tk widget-string)
       ));Window:configure
 
@@ -626,6 +646,7 @@
                )
          (setq widget-string (string widget-string command-string))
          );when
+      ;; (println "ts:Button:build.widget-string:" nl widget-string) 
       (Tk widget-string) ; ==> send to Tk
       );let
    );Button:build
@@ -633,7 +654,6 @@
 
 ## -------------------------------------------------------------------
 (new 'Window 'Entry)
-
 (define (Entry:build)
    [text] width in characters
    (ts:setw (Entry (Name 'line_edit_q) (Width 40) (Textvariable "textvar")
@@ -792,7 +812,7 @@
       (setq name-string (:build-tk-name (self)))
       (setq widget-string
             (string "ttk::frame " name-string ))
-      ;; (println "Frame:build.widget-string: " nl widget-string) 
+      (println "Frame.widget-string: " widget-string) 
       (Tk widget-string) ; ==> send to Tk
       ));Frame:build
 
@@ -879,14 +899,14 @@
    listbox .lbox -listvariable Liste -selectmode extended
    [/text]
    (let (name-string ""   widget-string ""   option-string "")
-      (println "Listbox:build.(self):" nl (self))
       (setq name-string  (:build-tk-name (self))) 
-      (setq widget-string (string "ttk::listbox " name-string))
+      ;; (setq widget-string (string "ttk::listbox " name-string))
       (setq widget-string
             (string "listbox " name-string))
       (when (assoc Listvariable (self))
          (setq option-string
-               (string " -listvariable " (last (assoc Listvariable (self)))))
+               (string " -listvariable "
+                       (last (assoc Listvariable (self)))))
          (setq widget-string (string widget-string option-string)))
       (when (assoc Selectmode (self))
          (setq option-string
@@ -900,11 +920,56 @@
          (setq option-string
                (string " -height " (last (assoc Height (self)))))
          (setq widget-string (string widget-string option-string)))
-      (println "Listbox:build.widget-string:" nl widget-string)
+      (when (assoc Xscrollcommand (self))
+         (setq option-string
+               (string " -xscrollcommand {"
+                       (:build-tk-name
+                        (eval (sym (last (assoc Xscrollcommand (self)))
+                                   MAIN)))
+                       " set}"
+                       ))
+         (setq widget-string (string widget-string option-string)))
+      (when (assoc Yscrollcommand (self))
+         (setq option-string
+               (string " -yscrollcommand {"
+                       (:build-tk-name
+                        (eval (sym (last (assoc Yscrollcommand (self)))
+                                   MAIN)))
+                       " set}"
+                       ))
+         (setq widget-string (string widget-string option-string))
+         )
+      ;; (println "Listbox.widget-string: " widget-string)
       (Tk widget-string) ; ==> send to Tk
       );let
    );Listbox:build
 
+
+## -------------------------------------------------------------------
+(new 'Window 'Scrollbar)
+(define (Scrollbar:build)
+   [text]
+   ttk::scrollbar .sbY -orient vertical -command {.lbox yview}
+   [/text]
+   (let (name-string ""   widget-string ""   option-string "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq widget-string
+            (string "ttk::scrollbar " name-string))
+      (when (assoc Orient (self))
+         (setq option-string
+               (string " -orient " (last (assoc Orient (self)))))
+         (setq widget-string (string widget-string option-string)))
+      (when (assoc Command (self))
+         (setq option-string
+               (string " -command {"
+                        (:build-tk-name
+                            (eval (sym (last (assoc Parent (self))) MAIN)))
+                       " " (last (assoc Command (self))) "}"
+                       ));x/yview
+         (setq widget-string (string widget-string option-string)))
+      ;; (println "Scrollbar.widget-string: " widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Scrollbar:build 
 
 
 ## -------------------------------------------------------------------
@@ -951,46 +1016,37 @@
       (cons (context) l)));Variable:Variable
 
 
-(new Class 'Parent)
-;; (define (Parent:Parent)
-;;    [text]
-;;    widget name, make sure it will come out as a symbol.
-;;    (Parent "Hugo") -> (Parent Hugo)
-;;    [/text]
-;;    (let (l '())
-;;       (setq l
-;;             (map (lambda (x)
-;;                     (or (and (string? x)
-;;                              (sym x 'MAIN)) ;make symbol if it's a string
-;;                         x))                 ;or else leave it as it is
-;;                  (args)))
-;;       (cons (context) l)));Parent:Parent
-
 
 ## --- Parameters/Options as Classes, continued --------------------------
-(new Class 'Width)
-(new Class 'Height)
-(new Class 'Title)
-(new Class 'Text)
-(new Class 'Textvariable)
-(new Class 'Listvariable)
-(new Class 'Padx)
-(new Class 'Pady)
-(new Class 'Grid)
+(new Class 'Borderwidth)
 (new Class 'Column)
 (new Class 'Columnspan)
+(new Class 'Command)
+(new Class 'Connect)                    ;connect two widgets
+(new Class 'Grid)
+(new Class 'Height)
+(new Class 'Labelanchor)
+(new Class 'Listvariable)
+(new Class 'Maxsize)
+(new Class 'Minsize)
+(new Class 'Orient)
+(new Class 'Padx)
+(new Class 'Pady)
+(new Class 'Parent)
+(new Class 'Relief)
 (new Class 'Row)
 (new Class 'Rowspan)
-(new Class 'Minsize)
-(new Class 'Maxsize)
-(new Class 'Command)
-(new Class 'State)
-(new Class 'Relief)
-(new Class 'Borderwidth)
-(new Class 'Labelanchor)
 (new Class 'Selectmode)
+(new Class 'State)
 (new Class 'Sticky)
+(new Class 'Text)
+(new Class 'Textvariable)
+(new Class 'Title)
+(new Class 'Width)
 (new Class 'Wrap)
+(new Class 'Xscrollcommand)
+(new Class 'Yscrollcommand)
+
 
 
 ## ----------- ts - LOCAL FUNCTIONS --------------------------------------

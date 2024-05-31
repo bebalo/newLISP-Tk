@@ -4887,7 +4887,7 @@ syntax
 \size scriptsize
 (:insert 
 \emph on
-obj num-ind str-val
+obj index str-val
 \emph default
 )
 \end_layout
@@ -4913,11 +4913,36 @@ obj
 \family typewriter
 \size scriptsize
 \emph on
-num-ind
+index.
+
 \family default
 \size default
 \emph default
-.
+ The 
+\family typewriter
+\size scriptsize
+\emph on
+index
+\family default
+\size default
+\emph default
+ is a number or 
+\family typewriter
+\size scriptsize
+\emph on
+
+\begin_inset Quotes qrd
+\end_inset
+
+end
+\begin_inset Quotes qrd
+\end_inset
+
+
+\family default
+\size default
+\emph default
+, meaning it will be appended at the end of the string.
 \end_layout
 
 \begin_layout Description
@@ -5645,27 +5670,101 @@ options
 \end_layout
 
 \begin_layout Itemize
-(Width <
-\emph on
-num
-\emph default
->) 
+
+\family typewriter
+\size scriptsize
+(Width <num>)
 \end_layout
 
 \begin_layout Itemize
-(Height <
-\emph on
-num
-\emph default
->)
+
+\family typewriter
+\size scriptsize
+(Height <num>)
 \end_layout
 
 \begin_layout Itemize
+
+\family typewriter
+\size scriptsize
 (Listvariable "List")
 \end_layout
 
 \begin_layout Itemize
+
+\family typewriter
+\size scriptsize
+(Xscrollcommand <sb-name>)
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+\size scriptsize
+(Yscrollcommand <sb-name>)
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+\size scriptsize
 (Selectmode "extended") – single | multiple | browse | extended 
+\end_layout
+
+\begin_layout Description
+example
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(ts:setVar "Liste" str) ;lbox-values
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(ts:setw (Listbox (Name "lbox")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                  (Listvariable "Liste")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                  (Xscrollcommand "sbX")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                  (Yscrollcommand "sbY")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                  (Selectmode "extended")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                  (Width 20) (Height 5)
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                  )) 
+\end_layout
+
+\begin_layout Subsubsection
+Scrollbar
 \end_layout
 
 \begin_layout Subsubsection
@@ -6013,6 +6112,65 @@ Name "lb1"
 
 \size scriptsize
 (Label (Name "lb1") (Text "Feld 1"))
+\end_layout
+
+\begin_layout Paragraph
+Forward declarations:
+\end_layout
+
+\begin_layout Standard
+<<<<<<<<>>>>>>>>
+\end_layout
+
+\begin_layout Standard
+If we have a circular reference or dependency like the one shown in the
+ example:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+;; forward declaration:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(ts:setw (Listbox (Name "lbox")))
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(ts:setw (Scrollbar (Name "sbY") (Parent "lbox")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                    (Orient "vertical") (Command "yview")
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+                    ))
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+;; full declaration
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(ts:setw (Listbox (Name "lbox") (Yscrollcommand "sbY"))) 
+\end_layout
+
+\begin_layout Standard
+then we 
 \end_layout
 
 \begin_layout Subsubsection
