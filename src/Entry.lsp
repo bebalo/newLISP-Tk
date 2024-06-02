@@ -17,6 +17,7 @@
 (define (showText)
    (let (text "")
       (setq text (ts:getVar "NameText"))
+      ;; (println "showText: " text)
       (:configure lbl2 (Text text))
       (Tk "update idletasks")
       ))
@@ -68,5 +69,6 @@
 (:setgrid btn-end (Row 2) (Column 1) (Padx 5) (Pady 5))
 
 (ts:xquit)                      ;quit using the x-button of the window
+(println "Entry-start")
 (Tk:mainloop )                  ;Tk: listening to in-coming events
 

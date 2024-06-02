@@ -1,5 +1,5 @@
 #!/usr/bin/env newlisp
-## Time-stamp: <2024-05-30 23:22:03 paul>
+## Time-stamp: <2024-06-02 11:14:58 paul>
 
 ;; Listbox with two Scrollbars
 ;;
@@ -14,11 +14,10 @@
 (define (MAIN:end)
    (ts:quit));end
 
-(setq mylist
-      '("hugo" "fritz" "anna" "lena" "alex" "marie" "peter" "claudia"
-        "ulrike" "jonas"))
 
-(setq str (join (sort mylist) " "))
+(setq str
+      "{Anton Berta Caesar} {Hugo Fritz Anna Lena Marie Peter Claudia Frida Dora Emil} {Friedrich Gustav Heinrich Ida} {Ulrike Jonas} {Julius Antonius Simon} {Ferdinand Maria Mirjam} {Anton Berta Caesar}"
+      )
 
 ## ---------------- GUI INIT ---------------------------------------------
 

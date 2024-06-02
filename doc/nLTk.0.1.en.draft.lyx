@@ -6479,7 +6479,7 @@ tcl{}
 \end_layout
 
 \begin_layout Standard
-Examples can be found in:
+Examples can be found in: 
 \end_layout
 
 \begin_layout LyX-Code
@@ -6496,6 +6496,164 @@ i.e.
 
 \size scriptsize
 /usr/share/doc/tklib/examples/scrollutil/BwScrollableFrmContent.tcl
+\end_layout
+
+\begin_layout Subsection
+Lists in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+tcl
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+tcl{}
+\end_layout
+
+\end_inset
+
+ lists containing lists are written as:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+set Group1 {Anton Berta Caesar}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+set Group2 {Hugo Fritz Anna Lena Marie Peter Claudia Frida Dora Emil}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+set Group3 {Friedrich Gustav Heinrich Ida}
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+set Groups [list $Group1 $Group2 $Group3]
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+puts "All Groups:"
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+puts $Groups
+\end_layout
+
+\begin_layout Standard
+This comes out as 
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+All Groups:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+{Anton Berta Caesar} {Hugo Fritz Anna Lena Marie Peter Claudia Frida Dora
+ Emil} 
+\backslash
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+{Friedrich Gustav Heinrich Ida}
+\end_layout
+
+\begin_layout Standard
+And this is the way to write them in our 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+nL
+\end_layout
+
+\end_inset
+
+-application:
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+(
+\series bold
+setq
+\series default
+ str
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+     "{Anton Berta Caesar} 
+\backslash
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+      {Hugo Fritz Anna Lena Marie Peter Claudia Frida Dora Emil} 
+\backslash
+
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+      {Friedrich Gustav Heinrich Ida}"
+\end_layout
+
+\begin_layout LyX-Code
+
+\size scriptsize
+      )
+\end_layout
+
+\begin_layout Standard
+(See the 
+\size footnotesize
+Scrollbars.lsp
+\size default
+ example.)
 \end_layout
 
 \begin_layout Section

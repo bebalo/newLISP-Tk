@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-05-30 22:37:40 paul>"))
+		  "<, Time-stamp: <2024-06-02 10:41:24 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -86,7 +86,7 @@
       (MAIN:assert
        (member
         (and (list? (self)) (not (empty? (self))) (first (self)))
-        '(Label Labelframe Window Frame Button Entry
+        '(Label Labelframe Window Frame Button Entry Menu
                 Checkbutton Scrolledtext Notebook Listbox
                 Scrollbar)) ;objects known so far
        (string "_build-tk-name: argument "
@@ -441,14 +441,23 @@
    [/text]
    (let (name-string "" widget-string "" option-string "" cmd ""  conn "")
       (MAIN:assert (not (empty? (args))) ":configure needs at least one argument")
+      ;; (println "Window:configure.(self)1: " (self))
+      ;; (println "Window:configure.(args): " (args))
       (setq name-string  (:build-tk-name (self)))
+      ;; (println "Window:configure.name-string: " name-string)
       (doargs (item)                    ;Arguments
          (when (or (= (first item) 'State)
                    (= (first item) 'Text)
                    (= (first item) 'Connect)
                    (= (first item) 'Command))
-            (setf (self)
-                  (unique (push item (self) -1)))));add it
+            (if (assoc (first item) (self))
+                (begin                  ;already there
+                   (setf (assoc (first item) (self)) item  ))
+                (begin
+                   (push item (self) -1)) ;add it
+                )
+            ));add it
+      ;; (println "Window:configure.(self)2: " (self))
       (setq widget-string
             (string name-string
                     " configure " ))
@@ -466,6 +475,7 @@
          (setq widget-string
                (string widget-string option-string))
          );when
+      ;; (println "Window:configure.widget-string1: " widget-string)
       (when (setq conn (assoc Connect (self)))
          (when (setq cmd (assoc Command (self)))
             (setq option-string
@@ -528,14 +538,103 @@
       ));ts:tooltip
 
 
-
-
 ## ===================================================================
 ## Sub-Classes with inherited methods from 'Window:
+## -----------------------------------------------------------------------
+(new 'Window 'Menu)
+##------------------------------------------------------------------------
+## (Menu (Name "m"))
+(define (Menu:build)
+   [text]
+   Build Tcl/Tk-string describing the Menu-object.  Example:
+   (Menu (Name "m") )
+   Using :build this will be translated into: 
+   option add *Menu.tearOff 0
+   . configure -menu .m # connect .m to main window .
+   [/text]
+   (let (name-string ""   widget-string "" )
+      (setq name-string  (:build-tk-name (self)))
+      (println  ":build.name-string: " name-string)
+      (unless (assoc Parent (self))
+         (setq widget-string            ;master menu
+               (string "option add *Menu.tearOff 0"
+                       nl ". configure -menu " name-string
+                       ))
+         (println  ":build.widget-string1: " nl widget-string)
+         )
+      (setq widget-string
+            (string widget-string 
+                    nl "menu " name-string))    ;initialize
+      (println  ":build.widget-string2: " nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Menu:build
 
-# --------------------------------------------------------------------
+
+(define (Menu:add-command)
+   "add an entry to menu (self)"
+   ;; .m add command -label "Open" -command tk_getOpenFile
+   ;; (:add-command m (Label "Open") (Command "tk_getOpenFile"))
+   (let (name-string ""   widget-string "" )
+      (setq name-string  (:build-tk-name (self)))
+      (when (assoc Label (args))
+         (setq widget-string
+               (string name-string " add command"
+                       " -label \"" (last (assoc Label (args))) "\""
+                       )));when
+      (when (assoc Command (args))
+         (setq widget-string
+               (string widget-string " -command"
+                       " " (last (assoc Command (args)))
+                       )));when
+      (println "Menu:add-command.widget-string2: " nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+   ));Menu:add-command
+
+
+(define (Menu:add-cascade)
+   "add an entry to menu (self) --
+   Creates a new hierarchical menu by associating a given menu to a parent menu."
+   (let (name-string ""  widget-string "" )
+      (setq name-string (:build-tk-name (self)))
+      (println ":add-cascade.name-string: " name-string)
+      (setq widget-string (string name-string " add cascade"  ))
+      (println ":add-cascade.widget-string1: " widget-string)
+      (println ":add-cascade.(args): " (args))
+      (when (assoc Label (args))
+         (println ":add-cascade.assoc Label: " (assoc Label (args)))
+         (setq widget-string
+               (string widget-string
+                       " -label \"" (last (assoc Label (args))) "\""
+                       )));when
+      (println ":add-cascade.widget-string2: " widget-string)
+      (when (assoc Menu (args))
+         (println ":add-cascade.assoc Menu: " (assoc Menu (args)))
+         (setq widget-string
+               (string widget-string " -menu "
+                       (:build-tk-name
+                        (eval (sym (last (assoc Menu (args)))
+                                   MAIN)))
+                       )));when
+      (println "Menu:add-cascade.widget-string2: " nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Menu:add-cascade
+
+
+(define (Menu:add-separator)
+   "add a separator to menu (self). Adds a separator line to the menu."
+   ;; .mbar.prj add separator
+   (let (name-string ""   widget-string "" )
+      (setq name-string  (:build-tk-name (self)))
+      (setq widget-string
+            (string name-string " add separator"))
+      (println "Menu:add-sparator.widget-string2: " nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Menu:add-sparator
+
+
+## -----------------------------------------------------------------------
 (new 'Window 'Label)            ;SubClass 'Label inherits from 'Window
-##--------------------------------------------------------------------
+##------------------------------------------------------------------------
 ;; @syntax (Label (Parent <symbol-or-string>) {option}... )
 ;;
 ;; A Label always needs a parent. If no parent is given, then the
