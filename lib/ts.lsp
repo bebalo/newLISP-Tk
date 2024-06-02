@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-06-02 10:41:24 paul>"))
+		  "<, Time-stamp: <2024-06-02 23:03:55 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -86,15 +86,15 @@
       (MAIN:assert
        (member
         (and (list? (self)) (not (empty? (self))) (first (self)))
-        '(Label Labelframe Window Frame Button Entry Menu
-                Checkbutton Scrolledtext Notebook Listbox
-                Scrollbar)) ;objects known so far
+        '(Button Checkbutton Compound Entry File Frame Image Label
+                 Labelframe Listbox Menu Notebook Scrollbar
+                 Scrolledtext Separator Style Text Window))
        (string "_build-tk-name: argument "
                (first (self)) " is not a known object"))
       
       (setq nn (assoc Name   (self)))   ;objetc's own Name
-      (when (assoc Name (self)) (setq erg (rest nn)))      ;part of result
-      (setq pp (assoc Parent (self))) 
+      (when (assoc Name (self)) (setq erg (rest nn))) ;part of result
+      (setq pp (assoc Parent (self)))
       (when (not (nil? pp))             ;Parent name given
          (setq par (eval (sym (last pp) MAIN))) ;parent's value
          (if par                                ;Parent exists
@@ -627,9 +627,9 @@
       (setq name-string  (:build-tk-name (self)))
       (setq widget-string
             (string name-string " add separator"))
-      (println "Menu:add-sparator.widget-string2: " nl widget-string)
+      ;; (println "Menu:add-separator.widget-string2: " nl widget-string)
       (Tk widget-string) ; ==> send to Tk
-      ));Menu:add-sparator
+      ));Menu:add-separator
 
 
 ## -----------------------------------------------------------------------
@@ -724,8 +724,10 @@
    will be translated to: 
    ttk::button .btQuit -text {Quit} -command {puts {(exit)}; exit}
                                                    {)}
+   ttk::button .box.tbutton1 -text "New" -command {} -style "Toolbutton" -compound top -image icon_new   
    [/text]
-   (let (name-string ""  widget-string "" text-string "" command-string "" )
+   (let (name-string ""  widget-string "" val ""
+                     text-string "" command-string "" )
       (setq name-string  (:build-tk-name (self))) 
       (when (assoc Text (self))        ;button Text
          (setq text-string            
@@ -745,6 +747,18 @@
                )
          (setq widget-string (string widget-string command-string))
          );when
+      (when (setq val (assoc Style (self)))
+         (setq widget-string
+               (string widget-string
+                       " -style " (last val))));when
+      (when (setq val (assoc Compound (self)))
+         (setq widget-string
+               (string widget-string
+                       " -compound " (last val))));when
+      (when (setq val (assoc Image (self)))
+         (setq widget-string
+               (string widget-string
+                       " -image " (last val))));when
       ;; (println "ts:Button:build.widget-string:" nl widget-string) 
       (Tk widget-string) ; ==> send to Tk
       );let
@@ -959,6 +973,35 @@
       ));Scrolledtext:build
 
 
+## -------------------------------------------------------------------
+(new 'Window 'Text)
+(define (Text:build)
+   "define a text widget "
+   ;; Parent, Name, Wrap
+   ;; (ts:setw (Text (Parent "fr") (Name "tx")
+   ;;                (Width 45) (Height 15)
+   ;;                (Wrap "word") ; none, char, word
+   ;;                ))
+   ;; (:build tx)
+   ;; (:setgrid tx (Padx 10) (Pady 10) (Sticky "nesw"))
+   (let (name-string ""  widget-string "" option-string "" val "" )
+      (setq name-string (:build-tk-name (self)))
+      (setq widget-string (string "text " name-string ))
+      (when (setq val (assoc Width (self)))
+         (setq option-string (string " -width " (last val)))
+         (setq widget-string (string widget-string option-string)))
+      (when (setq val (assoc Height (self)))
+         (setq option-string (string " -height " (last val)))
+         (setq widget-string (string widget-string option-string)))
+      (when (setq val (assoc Wrap (self)))
+         (setq option-string
+               (string " -wrap " (last val)))
+         (setq widget-string (string widget-string option-string))
+         );when
+      ;; (println "Text:build.widget-string:" nl widget-string) 
+      (Tk widget-string) ; ==> send to Tk
+      ));Text:build
+
 
 ## -------------------------------------------------------------------
 (new 'Window 'Notebook)
@@ -1045,6 +1088,27 @@
 
 
 ## -------------------------------------------------------------------
+(new 'Window 'Separator)
+(define (Separator:build)
+   [text]
+   Name, Parent,
+   orient: One of horizontal or vertical.
+   Specifies the orientation of the separator.
+   [/text]
+   (let (name-string ""   widget-string ""  val "")
+      (setq name-string  (:build-tk-name (self))) 
+      (setq widget-string (string "ttk::notebook " name-string))
+      (when (setq val (assoc Orient (self)))
+         (setq widget-string
+               (string "ttk::separator"
+                " " name-string
+                " -orient " (last val))));when
+      ;; (println "Separator:build.widget-string:" nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Separator:build
+
+
+## -------------------------------------------------------------------
 (new 'Window 'Scrollbar)
 (define (Scrollbar:build)
    [text]
@@ -1121,10 +1185,13 @@
 (new Class 'Column)
 (new Class 'Columnspan)
 (new Class 'Command)
+(new Class 'Compound)
 (new Class 'Connect)                    ;connect two widgets
 (new Class 'Grid)
+(new Class 'File)
 (new Class 'Height)
 (new Class 'Labelanchor)
+(new Class 'Image)
 (new Class 'Listvariable)
 (new Class 'Maxsize)
 (new Class 'Minsize)
@@ -1138,6 +1205,7 @@
 (new Class 'Selectmode)
 (new Class 'State)
 (new Class 'Sticky)
+(new Class 'Style)
 (new Class 'Text)
 (new Class 'Textvariable)
 (new Class 'Title)
@@ -1157,7 +1225,7 @@
    package require tooltip[/text]
    (MAIN:assert (string? tklib) "require: arg must be a string")
    (let (tk-string (string "package require " tklib))
-      (println "ts:require: >" tk-string "<")
+      ;; (println "ts:require: >" tk-string "<")
       (Tk tk-string)));ts:require
 
 
@@ -1186,6 +1254,25 @@
       (TkVar name hh)               ;remember result
       hh
       ));ts:getVar
+
+
+;; tcltk: image create photo imageName -file pathToImage
+;; image create photo       icon_new   -file  /usr/share/icons/Tango/22x22/actions/document-new.png
+;; (:image-create-photo (Name "<name>") (File "<path>"))
+(define (ts:image-create-photo )
+   "tcltk's image create photo"
+   ;; (:image-create-photo (Name "icon_new") (File "/usr/share/icons/Tango/22x22/actions/document-new.png"))
+   (let (name-string "" nme ""  fil ""  text-string "")
+      (when (setq nme (assoc Name (args)))
+         (setq name-string (string (last nme))))
+      (setq text-string (string "image create photo " name-string))
+      (when (setq fil (assoc File (args)))
+         (setq text-string
+               (string text-string " -file " (last fil)))
+         );when
+      ;; (println  "ts:image-create-photo.text-string: " nl text-string)
+      (Tk text-string) ; ==> send to Tk
+      ));ts:image-create-photo
 
 
 ##-----------------------------------------------------------------------
