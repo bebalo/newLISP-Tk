@@ -34,9 +34,12 @@
                  (Minsize (Width 300) (Height 100)) ))
 (:build root)
 
+## ------------- GUI -----------------------------------------------------
+
 (ts:setw (Menu (Name "menubar") )) ;object
 (:build menubar)
 
+;; ------------- filemenu ------------------------------------------------
 (ts:setw (Menu (Name "filemenu") (Parent "menubar")
                ;; (Tearoff "0")
                )) ;object
@@ -51,7 +54,7 @@
 
 (:add-cascade menubar (Label "File") (Menu "filemenu"))
 
-## -----------------------------------------------------------------------
+## ------------- editmenu ------------------------------------------------
 (ts:setw (Menu (Name "editmenu") (Parent "menubar")
                ;; (Tearoff "0")
                )) ;object
@@ -67,7 +70,7 @@
 
 (:add-cascade menubar (Label "Edit") (Menu "editmenu"))
 
-## -----------------------------------------------------------------------
+## ------------- helpmenu ------------------------------------------------
 (ts:setw (Menu (Name "helpmenu") (Parent "menubar")
                ;; (Tearoff "0")
                )) ;object

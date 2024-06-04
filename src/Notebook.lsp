@@ -1,5 +1,5 @@
 #!/usr/bin/env newlisp
-## Time-stamp: <2024-05-22 07:57:01 paul>
+## Time-stamp: <2024-06-03 16:53:34 paul>
 
 (constant (global 'LIBS)
           (string (env "HOME") "/.local/newLISP/newLISP-Tk/lib/" ))
@@ -15,6 +15,7 @@
    (:configure lbl (Text "new text"))
    (Tk "update idletasks"))
 
+## ------------- GUI -----------------------------------------------------
 
 (Tk:init)
 
@@ -28,7 +29,9 @@
 
 (ts:setw (Notebook (Name "nb") ))
 (:build nb)
-(:setgrid nb (Row 0) (Column 0))
+(:setgrid nb (Row 0) (Column 0)
+          (Sticky "news")
+          )
 
 (ts:setw (Frame (Name "fr1") (Parent "nb")  (Width 200) (Height 200)))
 (:build fr1)
@@ -56,11 +59,14 @@
                 (Text "Page 2: again som text here.") ; (Width 50)
                 ))
 (:build fr2lbl1)
-(:setgrid fr2lbl1 (Row 0) (Column 0) (Padx 10) (Pady 10))      ;make it visible
-
+(:setgrid fr2lbl1 (Row 0) (Column 0) (Padx 10) (Pady 10)) ;make it visible
+;; .nb select .nb.fr2
+(:select fr2)                            ;has no effect
 
 ## -----------------------------------------------------------------------
-
+;; not yet available in ts:
+(Tk "grid columnconfigure .    0  -weight 1")
+(Tk "grid rowconfigure    .    0  -weight 1")
 
 (ts:xquit)                      ;quit using the x-button of the window
 (Tk:mainloop )                  ;Tk: listening to in-coming events

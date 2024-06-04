@@ -501,7 +501,7 @@
             (string "focus "
                     name-string
                     ))
-      ;; (println "Window:focus.widget-string: " widget-string)
+      ;; (println ":focus.widget-string: " widget-string)
       (Tk widget-string)
       ));Window:focus
 
@@ -554,18 +554,18 @@
    [/text]
    (let (name-string ""   widget-string "" )
       (setq name-string  (:build-tk-name (self)))
-      (println  ":build.name-string: " name-string)
+      ;; (println  ":build.name-string: " name-string)
       (unless (assoc Parent (self))
          (setq widget-string            ;master menu
                (string "option add *Menu.tearOff 0"
                        nl ". configure -menu " name-string
                        ))
-         (println  ":build.widget-string1: " nl widget-string)
+         ;; (println  ":build.widget-string1: " nl widget-string)
          )
       (setq widget-string
             (string widget-string 
                     nl "menu " name-string))    ;initialize
-      (println  ":build.widget-string2: " nl widget-string)
+      ;; (println  ":build.widget-string2: " nl widget-string)
       (Tk widget-string) ; ==> send to Tk
       ));Menu:build
 
@@ -586,7 +586,7 @@
                (string widget-string " -command"
                        " " (last (assoc Command (args)))
                        )));when
-      (println "Menu:add-command.widget-string2: " nl widget-string)
+      ;; (println "Menu:add-command.widget-string2: " nl widget-string)
       (Tk widget-string) ; ==> send to Tk
    ));Menu:add-command
 
@@ -596,26 +596,26 @@
    Creates a new hierarchical menu by associating a given menu to a parent menu."
    (let (name-string ""  widget-string "" )
       (setq name-string (:build-tk-name (self)))
-      (println ":add-cascade.name-string: " name-string)
+      ;; (println ":add-cascade.name-string: " name-string)
       (setq widget-string (string name-string " add cascade"  ))
-      (println ":add-cascade.widget-string1: " widget-string)
-      (println ":add-cascade.(args): " (args))
+      ;; (println ":add-cascade.widget-string1: " widget-string)
+      ;; (println ":add-cascade.(args): " (args))
       (when (assoc Label (args))
-         (println ":add-cascade.assoc Label: " (assoc Label (args)))
+         ;; (println ":add-cascade.assoc Label: " (assoc Label (args)))
          (setq widget-string
                (string widget-string
                        " -label \"" (last (assoc Label (args))) "\""
                        )));when
-      (println ":add-cascade.widget-string2: " widget-string)
+      ;; (println ":add-cascade.widget-string2: " widget-string)
       (when (assoc Menu (args))
-         (println ":add-cascade.assoc Menu: " (assoc Menu (args)))
+         ;; (println ":add-cascade.assoc Menu: " (assoc Menu (args)))
          (setq widget-string
                (string widget-string " -menu "
                        (:build-tk-name
                         (eval (sym (last (assoc Menu (args)))
                                    MAIN)))
                        )));when
-      (println "Menu:add-cascade.widget-string2: " nl widget-string)
+      ;; (println "Menu:add-cascade.widget-string2: " nl widget-string)
       (Tk widget-string) ; ==> send to Tk
       ));Menu:add-cascade
 
@@ -930,6 +930,20 @@
       ));Frame:build
 
 
+(define (Frame:select)
+   "select a frame"
+   (let (name-string ""   widget-string "" notebook "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq notebook
+            (:build-tk-name
+             (eval (sym (last (assoc Parent (self))) MAIN))) )
+      ;; .n select .n.f1 # select frame f1 in notebook n
+      (setq widget-string (string notebook " select " name-string))
+      ;; (println "Notebook:select.widget-string: >"  widget-string "<")
+      (Tk widget-string) ; ==> send to Tk
+      ));Frame:select
+
+
 ## -------------------------------------------------------------------
 (new 'Window 'Scrolledtext)
 (define (Scrolledtext:build)
@@ -1008,13 +1022,12 @@
 (define (Notebook:build)
    [text]
    [/text]
-   (let (name-string ""   widget-string ""   text-string "")
+   (let (name-string ""   widget-string "" )
       (setq name-string  (:build-tk-name (self))) 
       (setq widget-string (string "ttk::notebook " name-string))
       ;; (println "Notebook:build.widget-string:" nl widget-string)
       (Tk widget-string) ; ==> send to Tk
-      );let
-   );Notebook:build
+      ));Notebook:build
 
 
 (define (Notebook:add-frame frm text) 
@@ -1202,6 +1215,7 @@
 (new Class 'Relief)
 (new Class 'Row)
 (new Class 'Rowspan)
+(new Class 'Select)
 (new Class 'Selectmode)
 (new Class 'State)
 (new Class 'Sticky)

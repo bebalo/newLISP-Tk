@@ -168,7 +168,7 @@
 (:setgrid box (Sticky "news"))
 
 ;; not yet available in ts:
-(Tk "grid columnconfigure .box 15 -weight 1")
+(Tk "grid columnconfigure .box 15 -weight 1") ;column 15=last label
 (Tk "grid rowconfigure    .box 1  -weight 1")
 (Tk "grid columnconfigure .    0  -weight 1")
 (Tk "grid rowconfigure    .    0  -weight 1")
