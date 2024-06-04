@@ -583,9 +583,11 @@
                        )));when
       (when (assoc Command (args))
          (setq widget-string
-               (string widget-string " -command"
-                       " " (last (assoc Command (args)))
-                       )));when
+               (string widget-string
+                       " -command {puts \"(MAIN:" 
+                       (last (assoc Command (args)))
+                       ")\"}")
+                       ));when
       ;; (println "Menu:add-command.widget-string2: " nl widget-string)
       (Tk widget-string) ; ==> send to Tk
    ));Menu:add-command

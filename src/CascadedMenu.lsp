@@ -18,13 +18,12 @@
 
 ## =======================================================================
 
-(define (nop)
+(define (MAIN:nop)
    (ts:setw (Button (Name "btn-end") (Text "Do nothing") ))
    (:build btn-end)
    ;; place button at the bottom row
    (:setgrid btn-end (Row 0) (Column 0) (Padx 5) (Pady 5)
-             )
-   )
+             ))
 
 ## ---------------- GUI INIT ---------------------------------------------
 
