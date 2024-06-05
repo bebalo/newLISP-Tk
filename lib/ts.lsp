@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-06-02 23:03:55 paul>"))
+		  "<, Time-stamp: <2024-06-04 19:56:18 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -87,7 +87,7 @@
        (member
         (and (list? (self)) (not (empty? (self))) (first (self)))
         '(Button Checkbutton Compound Entry File Frame Image Label
-                 Labelframe Listbox Menu Notebook Scrollbar
+                 Labelframe Listbox Menu Notebook Radiobutton Scrollbar
                  Scrolledtext Separator Style Text Window))
        (string "_build-tk-name: argument "
                (first (self)) " is not a known object"))
@@ -1150,9 +1150,40 @@
       ));Scrollbar:build 
 
 
+
+## -------------------------------------------------------------------
+(new 'Window 'Radiobutton)
+(define (Radiobutton:build)
+   [text]
+   ttk::radiobutton .rbRot -text "rot" -variable Farbe -value "rot" -command {Klick $Farbe}
+   [/text]
+   (let (val "" name-string ""   widget-string ""
+             option-string  ""   command-string "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq widget-string
+            (string "ttk::radiobutton " name-string))
+      (when (setq val (assoc Text (self)))
+         (setq option-string (string " -text " (last val)))
+         (setq widget-string (string widget-string option-string)))
+      (when (setq val (assoc Variable (self)))
+         (setq option-string (string " -variable " (last val)))
+         (setq widget-string (string widget-string option-string)))
+      (when (setq val (assoc Value (self)))
+         (setq option-string (string " -value " (last val)))
+         (setq widget-string (string widget-string option-string)))
+      (when (setq val (assoc Command (self)))
+         (setq command-string            
+               (string " -command {puts \"(MAIN:" 
+                (last val) ;a function w/o args
+                ")\"}"))
+         (setq widget-string (string widget-string command-string)))
+      ;; (println "Radiobutton.widget-string: " widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Radiobutton:build
+
+
 ## -------------------------------------------------------------------
 ## not yet done:
-(new 'Window 'Radiobutton)
 (new 'Window 'Menubutton)
 (new 'Window 'Combobox)
 
@@ -1225,6 +1256,7 @@
 (new Class 'Text)
 (new Class 'Textvariable)
 (new Class 'Title)
+(new Class 'Value)
 (new Class 'Width)
 (new Class 'Wrap)
 (new Class 'Xscrollcommand)
