@@ -116,7 +116,8 @@
    (Tk "bind . <Destroy> {puts {(exit)}}")
    [/text]
    ;; (println "Tk:Tk:(args): " nl (args))
-   ;; (println "Tk:Tk:(apply string (args)): " nl (apply string (args)))
+   ;; (when MAIN:dbg
+   ;;    (println "Tk:Tk:(apply string (args)): " nl (apply string (args))))
    (write-line
     myout
     (append "if { [catch {puts [" (apply string (args)) "] }] } {" 

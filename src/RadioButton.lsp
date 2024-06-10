@@ -1,5 +1,5 @@
 #!/usr/bin/env newlisp
-## Time-stamp: <2024-06-05 08:37:02 paul>
+## Time-stamp: <2024-06-05 18:21:59 paul>
 
 ;; RadioButtons
 
@@ -21,6 +21,24 @@
    ;; (:setgrid btn-nop (Row 0) (Column 0) (Padx 5) (Pady 5))
 )
 
+(define (MAIN:nop1)
+   (begin)
+   ;; (ts:setw (Button (Name "btn-end") (Text "Do nothing") ))
+   ;; (:build btn-end)
+   ;; ;; place button at the bottom row
+   ;; (:setgrid btn-end (Row 0) (Column 0) (Padx 5) (Pady 5))
+             );nop1
+
+
+(define (MAIN:nop2)
+   (begin)
+   ;; (ts:setw (Button (Name "btn-end") (Text "Do nothing") ))
+   ;; (:build btn-end)
+   ;; ;; place button at the bottom row
+   ;; (:setgrid btn-end (Row 0) (Column 0) (Padx 5) (Pady 5))
+             );nop2
+
+
 ## -----------------------------------------------------------------------
 
 (Tk:init)
@@ -31,30 +49,47 @@
 (:build win)
 
 ## -----------------------------------------------------------------------
-;; ;; tcl/tk:
-;; set Text ""
-;; set Farbe "rot"
-;; ttk::radiobutton .rbRot -text "rot" -variable Farbe -value "rot" -command {Klick $Farbe}
-;; ttk::radiobutton .rbGelb -text "gelb" -variable Farbe -value "gelb" -command {Klick $Farbe}
-;; ttk::radiobutton .rbBlau -text "blau" -variable Farbe -value "blau" -command {Klick $Farbe}
-;; ttk::label .lbAnzeige -textvariable Text
-(ts:setw (Radiobutton (Name "rbRot") (Text "rot")
-                      (Variable "Farbe") (Value "rot")
-                      (Command "nop")))
-(:build rbRot)
-(:setgrid rbRot (Row 0) (Column 0) (Padx 5) (Sticky "w"))
+;; create frame for toolbar box
+(ts:setw (Frame (Name "box")))          ;toolbar frame
+(:build box)
+;; (:setgrid box (Sticky "news"))
+(:setgrid box (Sticky "n"))
 
-(ts:setw (Radiobutton (Name "rbGelb") (Text "gelb")
-                      (Variable "Farbe") (Value "gelb")
-                      (Command "nop")))
-(:build rbGelb)
-(:setgrid rbGelb (Row 1) (Column 0) (Padx 5) (Sticky "w"))
 
-(ts:setw (Radiobutton (Name "rbBlau") (Text "blau")
-                      (Variable "Farbe") (Value "blau")
-                      (Command "nop")))
-(:build rbBlau)
-(:setgrid rbBlau (Row 2) (Column 0) (Padx 5) (Sticky "w"))
+## ab Row #1
+(ts:setw (Notebook (Name "nb")) (Parent "box")
+         )
+(:build nb)
+(:setgrid nb (Row 1) (Column 0) (Columnspan 20)
+          (Sticky "news")
+          )
+
+## ------------- ADD 2 FRAMES --------------------------------------------
+(ts:setw (Frame (Name "fr1") (Parent "nb")  (Width 200) (Height 200)))
+(:build fr1)
+(:add-frame nb fr1 "Label 1") 
+
+(ts:setw (Frame (Name "fr2") (Parent "nb") ))
+(:build fr2)
+(:add-frame nb fr2 "Label 2")
+
+;; One creates one or more buttons, and ties them together by supplying a variable name via the
+;; -variable argument. Each button with the same variable toggles on or off. For the programmer
+;; to know which button is selected, they provide a unique string to the -value argument. That
+;; value is assigned to the variable when the button has been selected.
+
+(ts:setw (Radiobutton (Parent "fr1") (Name "rbtn1") (Text "Zuletzt bearbeitet")
+                      (Variable "Farbe") (Value "zuletzt")
+                      (Command "nop1")))
+(:build rbtn1)
+(:setgrid rbtn1 (Row 0) (Column 0) (Padx 5))      ;make it visible
+
+(ts:setw (Radiobutton (Parent "fr1") (Name "rbtn2") (Text "VolltextSuche")
+                      (Variable "Farbe") (Value "vtsuche")
+                      (Command "nop2")))
+(:build rbtn2)
+(:setgrid rbtn2 (Row 0) (Column 1) (Padx 5))      ;make it visible
+
 
 
 ## -----------------------------------------------------------------------

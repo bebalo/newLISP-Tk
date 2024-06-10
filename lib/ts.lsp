@@ -1102,7 +1102,51 @@
    );Listbox:build
 
 
-## -------------------------------------------------------------------
+(define (Listbox:bind)
+   [text]
+   clicking in a list <obj> will call the command method
+   Bsp.:  (:bind lb (Event "<<ListboxSelect>>") (Command "doit"))
+   [/text]
+
+   (let (val ""  name-string ""   widget-string ""   option-string "")
+      ;; (println "Listbox:bind.(self): " (self))
+      ;; (println "Listbox:bind.(args): " (args) nl)
+      (setq name-string  (:build-tk-name (self)))
+      (when (setq val (assoc Event (args))) ;----------- Event
+         (setq widget-string
+               (string "bind"
+                " " name-string
+                " " (last val)))) ;"<<ListboxSelect>>"
+      (when (setq val (assoc Command (args))) ;--------- Command
+         (setq option-string            
+               (string
+                " {set Index [" name-string " curselection]; puts \"(MAIN:" 
+                (last val) ;a function w/o args
+                " $Index)\"}") )
+         (setq widget-string (string widget-string option-string)))
+      ;; (println "Listbox:bind.widget-string: " nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Listbox:bind
+
+
+(define (Listbox:curselection)          ;not yet tested
+   "get current selection in list <obj>: (:curselection <obj>)"
+   (let (name-string ""  widget-string "")
+      (setq name-string  (:build-tk-name (self)))
+      (setq widget-string
+            (string
+             "set Index [" name-string
+             " curselection]"
+             ;; ; puts \"(sg-tk:g-recentMeta $Index)\"
+             
+             ))
+      ;; (println "Listbox:curselection.widget-string: "  widget-string)
+      (Tk widget-string)
+      (ts:getVar "Index") 
+      ));Listbox:curselection
+
+
+## -----------------------------------------------------------------------
 (new 'Window 'Separator)
 (define (Separator:build)
    [text]
@@ -1163,7 +1207,7 @@
       (setq widget-string
             (string "ttk::radiobutton " name-string))
       (when (setq val (assoc Text (self)))
-         (setq option-string (string " -text " (last val)))
+         (setq option-string (string " -text \"" (last val) "\""))
          (setq widget-string (string widget-string option-string)))
       (when (setq val (assoc Variable (self)))
          (setq option-string (string " -variable " (last val)))
@@ -1233,11 +1277,12 @@
 (new Class 'Command)
 (new Class 'Compound)
 (new Class 'Connect)                    ;connect two widgets
-(new Class 'Grid)
+(new Class 'Event)
 (new Class 'File)
+(new Class 'Grid)
 (new Class 'Height)
-(new Class 'Labelanchor)
 (new Class 'Image)
+(new Class 'Labelanchor)
 (new Class 'Listvariable)
 (new Class 'Maxsize)
 (new Class 'Minsize)
