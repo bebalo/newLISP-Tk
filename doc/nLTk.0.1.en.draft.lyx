@@ -6656,6 +6656,75 @@ Scrollbars.lsp
  example.)
 \end_layout
 
+\begin_layout Subsection
+Radiobuttons
+\end_layout
+
+\begin_layout Subsubsection
+Coupling
+\end_layout
+
+\begin_layout Quote
+One creates one or more buttons, and ties them together by supplying a variable
+ name via the 
+\family typewriter
+\series bold
+\size scriptsize
+-variable
+\family default
+\series default
+\size default
+ argument.
+ Each button with the same variable toggles on or off.
+ For the programmer to know which button is selected, they provide a unique
+ string to the 
+\family typewriter
+\series bold
+\size scriptsize
+-value
+\family default
+\series default
+\size default
+ argument.
+ That value is assigned to the variable 
+\emph on
+when the button has been selected
+\emph default
+.
+\end_layout
+
+\begin_layout Quote
+(https://wiki.tcl-lang.org/page/radiobutton)
+\end_layout
+
+\begin_layout Paragraph
+radiobutton pre-selection:
+\end_layout
+
+\begin_layout Standard
+By 
+\emph on
+setting
+\emph default
+ the 
+\family typewriter
+\series bold
+\size scriptsize
+-variable
+\family default
+\series default
+\size default
+ to one of the pre-defined 
+\family typewriter
+\series bold
+\size scriptsize
+-value
+\family default
+\series default
+\size default
+'s we can set a pre-selection of one of the radiobuttons.
+\end_layout
+
 \begin_layout Section
 next
 \end_layout
@@ -6701,11 +6770,19 @@ add more examples using the available widgets:
 \end_layout
 
 \begin_layout Itemize
-☐ Checkbutton
+☒ Listbox
 \end_layout
 
 \begin_layout Itemize
-☐ Labelframe
+☒ Checkbutton
+\end_layout
+
+\begin_layout Itemize
+☒ Labelframe
+\end_layout
+
+\begin_layout Itemize
+☒ Radiobutton
 \end_layout
 
 \end_deeper
@@ -6715,19 +6792,11 @@ widgets not yet done:
 
 \begin_deeper
 \begin_layout Itemize
-Radiobutton
+☐ Menubutton
 \end_layout
 
 \begin_layout Itemize
-Menubutton
-\end_layout
-
-\begin_layout Itemize
-Listbox
-\end_layout
-
-\begin_layout Itemize
-Combobox
+☐ Combobox
 \end_layout
 
 \end_deeper

@@ -2,7 +2,7 @@
 (context 'ts)                           ;gui-server Tk: Tk-Server=ts
 (constant 'TS
           (string "This is context >" (context)
-		  "<, Time-stamp: <2024-06-04 19:56:18 paul>"))
+		  "<, Time-stamp: <2024-06-12 16:01:01 paul>"))
 ## Emacs: mittels >Alt-x time-stamp< wird die obige Zeile aktualisiert
 ##########################################################################
 ;; @module ts.lsp
@@ -797,6 +797,34 @@
       (Tk widget-string) ; ==> send to Tk
       );let
    );Entry:build
+
+
+(define (Entry:bind)
+   [text]    bind a key to entry-field:
+   syntax: bind Elementname <modifier-modifier ... -modifier-type-detail> {command}
+   example: bind .en <KeyPress> {puts "Es wurde die Taste %A gedrueckt."}
+   ts-Bsp.:  (:bind en (Event "<KeyPress-Return>") (Command "simple-search"))
+   [/text]
+
+   (let (val ""  name-string ""   widget-string ""   option-string "")
+      ;; (println "Entry:bind.(self): " (self))
+      ;; (println "Entry:bind.(args): " (args) nl)
+      (setq name-string  (:build-tk-name (self)))
+      (when (setq val (assoc Event (args))) ;----------- Event
+         (setq widget-string
+               (string "bind"
+                " " name-string
+                " " (last val)))) ;"<<EntrySelect>>"
+      (when (setq val (assoc Command (args))) ;--------- Command
+         (setq option-string            
+               (string
+                " {puts \"(MAIN:" 
+                (last val) ;a function w/o args
+                ")\"}") )
+         (setq widget-string (string widget-string option-string)))
+      ;; (println "Entry:bind.widget-string: " nl widget-string)
+      (Tk widget-string) ; ==> send to Tk
+      ));Entry:bind
 
 
 ## -------------------------------------------------------------------
